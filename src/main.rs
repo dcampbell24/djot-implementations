@@ -83,8 +83,8 @@ fn main() -> anyhow::Result<()> {
                 x.2,
                 x.3,
                 x.4,
-                BLUE.filled(),
-                BLUE,
+                GREEN.filled(),
+                GREEN,
                 15,
             )
         }))?
@@ -99,8 +99,8 @@ fn main() -> anyhow::Result<()> {
                 x.2,
                 x.3,
                 x.4,
-                GREEN.filled(),
-                GREEN,
+                BLUE.filled(),
+                BLUE,
                 15,
             )
         }))?
