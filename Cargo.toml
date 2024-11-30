@@ -1,0 +1,22 @@
+[package]
+name = "djot-implementations"
+version = "0.1.0"
+edition = "2021"
+description = "Generates a graph of Djot implementations render time."
+license = "MIT OR Apache-2.0"
+# repository = ""
+readme = "README.md"
+keywords = ["djot"]
+categories = ["command-line-utilities", "multimedia::images"]
+
+[dependencies]
+anyhow = "1"
+chrono = "0.4"
+plotters = "0.3"
+
+[lints.clippy]
+cargo = "warn"
+pedantic = "warn"
+
+multiple_crate_versions = { level = "allow", priority = 1 }
+too_many_lines = { level = "allow", priority = 1 }
