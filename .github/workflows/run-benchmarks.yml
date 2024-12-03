@@ -72,7 +72,7 @@ jobs:
           echo "$(go version)  "
           echo "Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)  "
           echo "$(ghc --version)  "
-          echo "Haskell UNKNOWN  "
+          echo "Haskell djot UNKNOWN  "
           echo "node version $(node --version)  "
           echo "JavaScript $(djot --version)  "
           echo "$(lua -v)  "

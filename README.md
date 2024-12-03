@@ -18,7 +18,7 @@ Running on AMD EPYC 7763 64-Core Processor at 2024-12-03 17:28:00+00:00
 go version go1.23.3 linux/amd64  
 Go djot godjot@v1.0.5  
 The Glorious Glasgow Haskell Compilation System, version 9.10.1  
-Haskell UNKNOWN  
+Haskell djot UNKNOWN  
 node version v22.11.0  
 JavaScript djot 0.3.1  
 Lua 5.4.4  Copyright (C) 1994-2022 Lua.org, PUC-Rio  
