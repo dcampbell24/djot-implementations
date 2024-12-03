@@ -1,7 +1,8 @@
 name: Djot Implementations
 run-name: Djot Implementations
 on:
-  push
+  schedule:
+    - cron: "13 * 1 * *"
 
 jobs:
   implementations:
@@ -54,7 +55,7 @@ jobs:
 
       - name: Run Benchmarks
         run: >
-          hyperfine --warmup 20 --shell=none --export-markdown implementations.md --sort mean-time
+          hyperfine --warmup 20 --shell=none --export-markdown pandoc-manual-benchmarks.md --sort mean-time
           --command-name Go "$HOME/go/bin/godjot pandoc-manual.dj"
           --command-name Haskell "djoths pandoc-manual.dj"
           --command-name JavaScript "djot pandoc-manual.dj"
@@ -65,7 +66,7 @@ jobs:
         run: |
           echo Time for parsing pandoc-manual.dj into html:
           echo
-          cat implementations.md
+          cat pandoc-manual-benchmarks.md
           echo
           echo "Running on $(lscpu | grep "Model name: [-|(|)| |a-z|A-Z|0-9]*" | sed -e 's/Model name: *//') at $(date --rfc-3339=seconds)  "
           echo "$(go version)  "
