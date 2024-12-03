@@ -7,7 +7,7 @@ fn parse_time(t: &str) -> Result<DateTime<Utc>, ParseError> {
     DateTime::parse_from_str(t, "%F %H:%M:%S %:z").map(|dt| dt.to_utc())
 }
 
-const OUT_FILE_NAME: &str = "plotters-graphs/render-time.png";
+const OUT_FILE_NAME: &str = "plotters-graphs/pandoc-manual-benchmarks.png";
 
 fn main() -> anyhow::Result<()> {
     let go_data = get_data_go();
