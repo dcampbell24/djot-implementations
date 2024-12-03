@@ -58,7 +58,7 @@ jobs:
       - name: Run Benchmarks
         run: >
           hyperfine --warmup 20 --shell=none --export-markdown benchmarks-1.md --sort mean-time
-          --command-name Go "$HOME/go/bin/godjot pandoc-manual.dj"
+          --command-name Go "$HOME/go/bin/godjot -from pandoc-manual.dj"
           --command-name Haskell "djoths pandoc-manual.dj"
           --command-name JavaScript "djot pandoc-manual.dj"
           --command-name Lua "$HOME/.luarocks/bin/djot pandoc-manual.dj"
@@ -74,7 +74,7 @@ jobs:
       - name: Run Benchmarks
         run: >
           hyperfine --warmup 20 --shell=none --export-markdown benchmarks-2.md --sort mean-time
-          --command-name Go "$HOME/go/bin/godjot tartan-wikipedia.dj"
+          --command-name Go "$HOME/go/bin/godjot -from tartan-wikipedia.dj"
           --command-name Haskell "djoths tartan-wikipedia.dj"
           --command-name JavaScript "djot tartan-wikipedia.dj"
           --command-name Lua "$HOME/.luarocks/bin/djot tartan-wikipedia.dj"
