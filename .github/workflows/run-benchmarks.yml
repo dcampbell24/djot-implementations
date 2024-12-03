@@ -86,7 +86,7 @@ jobs:
           echo
           cat benchmarks-1.md
           echo
-          echo Time for parsing tartan-wikipedia.dj into html"
+          echo Time for parsing tartan-wikipedia.dj into html:
           echo
           cat benchmarks-2.md
           echo
