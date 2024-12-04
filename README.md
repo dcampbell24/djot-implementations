@@ -4,17 +4,27 @@ This repository benchmarks the various Djot implementations and generates a repo
 
 ## Benchmarks
 
-### Pandoc Manual
+Time for parsing pandoc-manual.dj (244K) into html:
 
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
 |:---|---:|---:|---:|---:|
-| `Go` | 1.1 ± 0.1 | 1.0 | 2.6 | 1.00 |
-| `Rust` | 6.0 ± 0.1 | 5.9 | 8.0 | 5.68 ± 0.41 |
-| `Haskell` | 33.4 ± 0.2 | 32.9 | 34.5 | 31.40 ± 2.16 |
-| `JavaScript` | 126.2 ± 4.2 | 118.2 | 132.5 | 118.58 ± 9.04 |
-| `Lua` | 148.2 ± 1.0 | 146.6 | 150.2 | 139.17 ± 9.58 |
+| `Rust` | 6.0 ± 0.1 | 5.8 | 8.2 | 1.00 |
+| `Haskell` | 34.8 ± 1.1 | 33.6 | 38.0 | 5.76 ± 0.21 |
+| `Go` | 35.4 ± 2.0 | 30.8 | 41.5 | 5.86 ± 0.35 |
+| `JavaScript` | 127.7 ± 4.1 | 117.6 | 138.6 | 21.13 ± 0.78 |
+| `Lua` | 149.7 ± 1.9 | 146.3 | 152.6 | 24.77 ± 0.57 |
 
-Running on AMD EPYC 7763 64-Core Processor at 2024-12-03 17:28:00+00:00  
+Time for parsing tartan-wikipedia.dj (1.3M) into html:
+
+| Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
+|:---|---:|---:|---:|---:|
+| `Rust` | 34.6 ± 0.4 | 34.0 | 36.3 | 1.00 |
+| `Go` | 214.0 ± 9.1 | 198.8 | 229.2 | 6.19 ± 0.27 |
+| `Haskell` | 235.5 ± 1.6 | 232.4 | 238.5 | 6.81 ± 0.09 |
+| `JavaScript` | 394.5 ± 4.8 | 386.5 | 404.0 | 11.41 ± 0.19 |
+| `Lua` | 1139.3 ± 6.5 | 1132.9 | 1151.9 | 32.95 ± 0.40 |
+
+Running on AMD EPYC 7763 64-Core Processor at 2024-12-04 01:15:26+00:00  
 go version go1.23.3 linux/amd64  
 Go djot godjot@v1.0.5  
 The Glorious Glasgow Haskell Compilation System, version 9.10.1  
