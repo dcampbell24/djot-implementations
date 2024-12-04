@@ -82,11 +82,11 @@ jobs:
 
       - name: Format Markdown File
         run: |
-          echo Time for parsing pandoc-manual.dj into html:
+          echo Time for parsing pandoc-manual.dj \($(echo $(du -h pandoc-manual.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z-]+/\1/')\) into html:
           echo
           cat benchmarks-1.md
           echo
-          echo Time for parsing tartan-wikipedia.dj into html:
+          echo Time for parsing tartan-wikipedia.dj \($(echo $(du -h tartan-wikipedia.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z-]+/\1/')\) into html:
           echo
           cat benchmarks-2.md
           echo
