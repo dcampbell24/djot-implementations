@@ -58,4 +58,4 @@ jobs:
 
       - name: cat Markdown File
         run: |
-          cat benchmark.md
+          cat benchmarks.md
