@@ -51,54 +51,11 @@ jobs:
           cargo install hyperfine
           hyperfine --version
 
-      - name: Download Pandoc Manual
+      - name: Download Files, Run Pandoc, Run Benchmarks, Save Markdown File
         run: |
-          wget --quiet --no-clobber --output-document=pandoc-manual.dj https://github.com/jgm/djot/files/11900633/pandoc-manual.txt
+          git clone https://github.com/dcampbell24/djot-implementations.git
+          djot-implementation/benchmarks.sh
 
-      - name: Run Benchmarks
-        run: >
-          hyperfine --warmup 20 --shell=none --export-markdown benchmarks-1.md --sort mean-time
-          --command-name Go "$HOME/go/bin/godjot -from pandoc-manual.dj"
-          --command-name Haskell "djoths pandoc-manual.dj"
-          --command-name JavaScript "djot pandoc-manual.dj"
-          --command-name Lua "$HOME/.luarocks/bin/djot pandoc-manual.dj"
-          --command-name Rust "jotdown pandoc-manual.dj"
-
-      - name: Download Tartan Wikipedia Page
+      - name: cat Markdown File
         run: |
-          wget --quiet --no-clobber --output-document=tartan-wikipedia.html https://en.wikipedia.org/wiki/Tartan
-
-      - name: Run Pandoc
-        run: pandoc --from=html --to=djot --output=tartan-wikipedia.dj tartan-wikipedia.html
-
-      - name: Run Benchmarks
-        run: >
-          hyperfine --warmup 20 --shell=none --export-markdown benchmarks-2.md --sort mean-time
-          --command-name Go "$HOME/go/bin/godjot -from tartan-wikipedia.dj"
-          --command-name Haskell "djoths tartan-wikipedia.dj"
-          --command-name JavaScript "djot tartan-wikipedia.dj"
-          --command-name Lua "$HOME/.luarocks/bin/djot tartan-wikipedia.dj"
-          --command-name Rust "jotdown tartan-wikipedia.dj"
-
-      - name: Format Markdown File
-        run: |
-          echo Time for parsing pandoc-manual.dj \($(echo $(du -h pandoc-manual.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z-]+/\1/')\) into html:
-          echo
-          cat benchmarks-1.md
-          echo
-          echo Time for parsing tartan-wikipedia.dj \($(echo $(du -h tartan-wikipedia.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z-]+/\1/')\) into html:
-          echo
-          cat benchmarks-2.md
-          echo
-          echo "Running on $(lscpu | grep "Model name: [-|(|)| |a-z|A-Z|0-9]*" | sed -e 's/Model name: *//') at $(date --rfc-3339=seconds)  "
-          echo "$(go version)  "
-          echo "Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)  "
-          echo "$(ghc --version)  "
-          echo "Haskell djot UNKNOWN  "
-          echo "node version $(node --version)  "
-          echo "JavaScript $(djot --version)  "
-          echo "$(lua -v)  "
-          echo "Lua $($HOME/.luarocks/bin/djot --version)  "
-          echo "$(rustc --version)  "
-          echo "Rust djot"
-          jotdown --version
+          cat benchmark.md

@@ -8,6 +8,8 @@ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.23.3.linux-amd64.ta
 # Haskell
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 cabal install djot # Installed in: ~/.cabal/bin/djoths
+wget --quiet https://github.com/jgm/pandoc/releases/download/3.5/pandoc-3.5-1-amd64.deb
+sudo dpkg --install pandoc-3.5-1-amd64.deb
 
 # JavaScript
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
