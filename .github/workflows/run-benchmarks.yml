@@ -1,8 +1,7 @@
 name: Djot Implementations
 run-name: Djot Implementations
 on:
-  schedule:
-    - cron: "13 * 1 * *"
+  push
 
 jobs:
   implementations:
