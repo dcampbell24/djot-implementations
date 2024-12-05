@@ -54,7 +54,7 @@ jobs:
       - name: Download Files, Run Pandoc, Run Benchmarks, Save Markdown File
         run: |
           git clone https://github.com/dcampbell24/djot-implementations.git
-          djot-implementation/benchmarks.sh
+          djot-implementations/benchmarks.sh
 
       - name: cat Markdown File
         run: |
