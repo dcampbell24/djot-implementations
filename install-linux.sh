@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/dash -e
 
 # Go
 wget https://go.dev/dl/go1.23.3.linux-amd64.tar.gz

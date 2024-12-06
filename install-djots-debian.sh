@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/dash -e
 
 # Go
 go install github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
