@@ -9,51 +9,24 @@ jobs:
     name: Djot Implementations
     runs-on: ubuntu-latest
     steps:
-      - name: Install Go Djot
-        run: |
-          go install github.com/sivukhin/godjot@latest
-
-      - name: Install Haskell Djot and Pandoc
-        run: |
-          cabal update
-          cabal install djot
-          wget --quiet https://github.com/jgm/pandoc/releases/download/3.5/pandoc-3.5-1-amd64.deb
-          sudo dpkg --install pandoc-3.5-1-amd64.deb
-
       - name: Install JavaScript
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
-      - name: Install JavaScript Djot
-        run: |
-          npm install -g @djot/djot
 
-      - name: Install Lua, LuaRocks, and Lua Djot
-        run: |
-          sudo apt-get --yes install lua5.4 liblua5.4-dev
-          wget --quiet https://luarocks.org/releases/luarocks-3.11.1.tar.gz
-          tar zxpf luarocks-3.11.1.tar.gz
-          cd luarocks-3.11.1
-          ./configure && make && sudo make install
-          cd ../
-          luarocks install --local djot
+      - name: Download djot-implementations
+        run: git clone https://github.com/dcampbell24/djot-implementations.git
 
-      - name: Install Rust toolchain and Rust Djot
+      - name: Install Lua and LuaRocks
         run: |
-          rustup update stable
-          rustup default stable
-          cargo install jotdown
-          cargo --version
-          jotdown --version
+          djot-implementations/install-lua-debian.sh
 
-      - name: Install Hyperfine
+      - name: Install Djots, Hyperfine and Pandoc
         run: |
-          cargo install hyperfine
-          hyperfine --version
+          djot-implementations/install-djots-debian.sh
 
       - name: Download Files, Run Pandoc, Run Benchmarks, Save Markdown File
         run: |
-          git clone https://github.com/dcampbell24/djot-implementations.git
           djot-implementations/benchmarks.sh
 
       - name: cat Markdown File
