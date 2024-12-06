@@ -1,5 +1,8 @@
+use std::fs;
+
 use anyhow::Ok;
 use chrono::{DateTime, Days, ParseError, Utc};
+use djot_implementations::Plot;
 use full_palette::{GREY_A100, GREY_A200, PURPLE};
 use plotters::prelude::*;
 
@@ -10,6 +13,9 @@ fn parse_time(t: &str) -> Result<DateTime<Utc>, ParseError> {
 const OUT_FILE_NAME: &str = "plotters-graphs/pandoc-manual-benchmarks.png";
 
 fn main() -> anyhow::Result<()> {
+    let data_1: String = fs::read_to_string("benchmarks-1.ron")?;
+    let data_1: Plot = ron::from_str(&data_1)?;
+
     let go_data = get_data_go();
     let haskell_data = get_data_haskell();
     let javascript_data = get_data_javascript();
