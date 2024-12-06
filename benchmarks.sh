@@ -29,11 +29,11 @@ hyperfine --warmup 20 --shell=none --export-markdown markdown/benchmarks-2.md --
 --command-name Rust "jotdown $TARTAN_WIKIPEDIA_DJ"
 
 cat > markdown/benchmarks.md <<EOF
-Time for parsing pandoc-manual.dj ($(echo $(du -h pandoc-manual.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z-]+/\1/')) into html:
+Time for parsing pandoc-manual.dj ($(echo $(du -h djot/pandoc-manual.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z/-]+/\1/')) into html:
 
 $(cat markdown/benchmarks-1.md)
 
-Time for parsing tartan-wikipedia.dj ($(echo $(du -h tartan-wikipedia.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z-]+/\1/')) into html:
+Time for parsing tartan-wikipedia.dj ($(echo $(du -h djot/tartan-wikipedia.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z/-]+/\1/')) into html:
 
 $(cat markdown/benchmarks-2.md)
 
