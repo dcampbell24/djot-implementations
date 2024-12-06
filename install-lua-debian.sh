@@ -1,4 +1,4 @@
-#!/bin/dash -e
+#!/bin/bash -e
 
 # To install Lua:
 sudo apt-get --yes install lua5.4 liblua5.4-dev
