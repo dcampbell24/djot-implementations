@@ -41,7 +41,7 @@ Running on $(lscpu | grep "Model name: [-|(|)| |a-z|A-Z|0-9]*" | sed -e 's/Model
 $(go version)  
 Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)  
 $(ghc --version)  
-Haskell djot UNKNOWN  
+Haskell djot $(ls $HOME/.cabal/packages/hackage.haskell.org/djot/)  
 node version $(node --version)  
 JavaScript $(djot --version)  
 $(lua -v)  
