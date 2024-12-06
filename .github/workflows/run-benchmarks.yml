@@ -27,7 +27,7 @@ jobs:
 
       - name: Install Djots and Hyperfine
         run: |
-          djot-implementations/install-djots-debian.sh
+          djot-implementations/install-djots.sh
 
       - name: Download Files, Run Pandoc, Run Benchmarks, Save Markdown File
         run: |
