@@ -16,12 +16,12 @@ const YELLOW_IBM: RGBColor = RGBColor(0xFF, 0xB0, 0x00);
 fn main() -> anyhow::Result<()> {
     make_graph(
         "pandoc-manual.dj",
-        "ron/benchmarks-1.ron",
+        "ron/pandoc-manual-benchmarks.ron",
         "plotters-graphs/pandoc-manual-benchmarks.png",
     )?;
     make_graph(
         "tartan-wikipedia.dj",
-        "ron/benchmarks-2.ron",
+        "ron/tartan-wikipedia-benchmarks.ron",
         "plotters-graphs/tartan-wikipedia-benchmarks.png",
     )?;
     Ok(())
