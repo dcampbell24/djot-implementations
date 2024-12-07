@@ -1,4 +1,4 @@
-use std::fs;
+use std::{fs, process::Command};
 
 use anyhow::Ok;
 use chrono::Days;
@@ -31,10 +31,16 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     let data_1: String = fs::read_to_string(file_in)?;
     let data_1: Plot = ron::from_str(&data_1)?;
 
+    let file_size = Command::new("./file-size.sh")
+        .arg(&format!("djot/{render_file}"))
+        .output()?
+        .stdout;
+    let file_size = String::from_utf8_lossy(&file_size).trim().to_string();
+
     let root = BitMapBackend::new(file_out, (1024, 768)).into_drawing_area();
     root.fill(&GREY_A100)?;
     root.titled(
-        &format!("Time to Render {render_file} to html (ms)"),
+        &format!("Time to Render {render_file} ({file_size}) to html (ms)"),
         ("sans-serif", 40.0),
     )?;
 
