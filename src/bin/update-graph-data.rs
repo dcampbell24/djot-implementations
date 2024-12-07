@@ -10,5 +10,12 @@ fn main() -> anyhow::Result<()> {
     let plot = Plot::from(results);
     let plot_ron = ron::ser::to_string_pretty(&plot, ron::ser::PrettyConfig::default())?;
     fs::write("ron/benchmarks-1.ron", plot_ron.as_bytes())?;
+
+    let data: String = fs::read_to_string("json/benchmarks-2.json")?;
+    let results: Results = serde_json::from_str(&data)?;
+    let plot = Plot::from(results);
+    let plot_ron = ron::ser::to_string_pretty(&plot, ron::ser::PrettyConfig::default())?;
+    fs::write("ron/benchmarks-2.ron", plot_ron.as_bytes())?;
+
     Ok(())
 }

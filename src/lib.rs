@@ -17,7 +17,7 @@ impl From<Results> for Plot {
             let plot_data_ = PlotData {
                 date,
                 mean: result.mean,
-                std_dev: result.stddev
+                std_dev: result.stddev,
             };
 
             plot_data
@@ -32,10 +32,7 @@ impl From<Results> for Plot {
         let mut cpu = String::from_utf8_lossy(&output.stdout).into_owned();
         cpu = cpu.trim().to_string();
 
-        Plot {
-            cpu,
-            plot_data,
-        }
+        Plot { cpu, plot_data }
     }
 }
 
