@@ -3,8 +3,15 @@ use std::fs;
 use anyhow::Ok;
 use chrono::Days;
 use djot_implementations::Plot;
-use full_palette::{GREY_A100, GREY_A200, PURPLE};
+use full_palette::GREY_A100;
 use plotters::prelude::*;
+
+// IBM Design Library
+const BLUE_IBM: RGBColor = RGBColor(0x64, 0x8F, 0xFF);
+const PURPLE_IBM: RGBColor = RGBColor(0x78, 0x5E, 0xF0);
+const RED_IBM: RGBColor = RGBColor(0xDC, 0x26, 0x7F);
+const ORANGE_IBM: RGBColor = RGBColor(0xFE, 0x61, 0x00);
+const YELLOW_IBM: RGBColor = RGBColor(0xFF, 0xB0, 0x00);
 
 fn main() -> anyhow::Result<()> {
     make_graph(
@@ -25,7 +32,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     let data_1: Plot = ron::from_str(&data_1)?;
 
     let root = BitMapBackend::new(file_out, (1024, 768)).into_drawing_area();
-    root.fill(&GREY_A200)?;
+    root.fill(&GREY_A100)?;
     root.titled(
         &format!("Time to Render {render_file} to html (ms)"),
         ("sans-serif", 40.0),
@@ -51,7 +58,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     let max = data
         .map(|data| {
             data.iter()
-                .map(|data| ((data.mean + data.std_dev) * 1_000.0 + 10.0) as i32)
+                .map(|data| ((data.mean + data.std_dev) * 1_000.0) as i32)
                 .max()
                 .unwrap()
         })
@@ -64,10 +71,10 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
         .caption(format!("on {}", data_1.cpu), ("sans-serif", 20).into_font())
         .build_cartesian_2d(from_date..to_date, 0f32..max)?;
 
-    chart.configure_mesh().light_line_style(GREY_A200).draw()?;
+    chart.configure_mesh().light_line_style(GREY_A100).draw()?;
 
     let commands = ["Go", "Haskell", "JavaScript", "Lua", "Rust"];
-    let colors = [RED, YELLOW, GREEN, BLUE, PURPLE];
+    let colors = [RED_IBM, ORANGE_IBM, YELLOW_IBM, BLUE_IBM, PURPLE_IBM];
     for (command, color) in commands.iter().zip(colors) {
         let data = &data_1.plot_data[*command];
 
