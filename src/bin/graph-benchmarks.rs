@@ -32,7 +32,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     let data_1: Plot = ron::from_str(&data_1)?;
 
     let file_size = Command::new("./file-size.sh")
-        .arg(&format!("djot/{render_file}"))
+        .arg(format!("djot/{render_file}"))
         .output()?
         .stdout;
     let file_size = String::from_utf8_lossy(&file_size).trim().to_string();
@@ -60,7 +60,9 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
 
     let (_upper, lower) = root.split_vertically(50);
 
-    let data = data_1.plot_data.iter().map(|(_command, data)| data);
+    let data = data_1.plot_data.values();
+
+    #[allow(clippy::cast_possible_truncation, clippy::cast_precision_loss)]
     let max = data
         .map(|data| {
             data.iter()
