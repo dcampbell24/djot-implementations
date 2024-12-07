@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir djot html markdown
+mkdir djot html json markdown ron
 
 PANDOC_MANUAL=https://github.com/jgm/djot/files/11900633/pandoc-manual.txt
 PANDOC_MANUAL_DJ=djot/pandoc-manual.dj
@@ -8,6 +8,7 @@ PANDOC_MANUAL_DJ=djot/pandoc-manual.dj
 wget --quiet --no-clobber --output-document=$PANDOC_MANUAL_DJ $PANDOC_MANUAL
 
 hyperfine --warmup 20 --shell=none --export-markdown markdown/benchmarks-1.md --sort mean-time \
+--export-json json/benchmarks-1.json \
 --command-name Go "$HOME/go/bin/godjot -from $PANDOC_MANUAL_DJ" \
 --command-name Haskell "djoths $PANDOC_MANUAL_DJ" \
 --command-name JavaScript "djot $PANDOC_MANUAL_DJ" \
@@ -22,6 +23,7 @@ wget --quiet --no-clobber --output-document=$TARTAN_WIKIPEDIA_HTML $TARTAN_WIKIP
 pandoc --from=html --to=djot --output=$TARTAN_WIKIPEDIA_DJ $TARTAN_WIKIPEDIA_HTML
 
 hyperfine --warmup 20 --shell=none --export-markdown markdown/benchmarks-2.md --sort mean-time \
+--export-json json/benchmarks-2.json \
 --command-name Go "$HOME/go/bin/godjot -from $TARTAN_WIKIPEDIA_DJ" \
 --command-name Haskell "djoths $TARTAN_WIKIPEDIA_DJ" \
 --command-name JavaScript "djot $TARTAN_WIKIPEDIA_DJ" \

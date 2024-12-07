@@ -1,27 +1,31 @@
-use std::process::Command;
+use std::{collections::HashMap, process::Command};
 
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Debug, Deserialize)]
 pub struct Plot {
-    document: String,
-    cpu: String,
-    plot_data: Vec<PlotData>,
+    pub cpu: String,
+    pub plot_data: HashMap<String, Vec<PlotData>>,
 }
 
 impl From<Results> for Plot {
     fn from(results: Results) -> Self {
         let date = Utc::now();
-        let mut plot_data = Vec::new();
+        let mut plot_data = HashMap::new();
         for result in results.results {
-            plot_data.push(PlotData {
-                command: result.command,
+            let plot_data_ = PlotData {
                 date,
                 mean: result.mean,
-                min: result.min,
-                max: result.max,
-            });
+                std_dev: result.stddev
+            };
+
+            plot_data
+                .entry(result.command)
+                .and_modify(|data: &mut Vec<_>| {
+                    data.push(plot_data_.clone());
+                })
+                .or_insert(vec![plot_data_]);
         }
 
         let output = Command::new("./cpu-name.sh").output().unwrap();
@@ -29,28 +33,25 @@ impl From<Results> for Plot {
         cpu = cpu.trim().to_string();
 
         Plot {
-            document: String::new(),
             cpu,
             plot_data,
         }
     }
 }
 
-#[derive(Serialize, Debug, Deserialize)]
-struct PlotData {
-    command: String,
-    date: DateTime<Utc>,
-    mean: f32,
-    min: f32,
-    max: f32,
+#[derive(Clone, Serialize, Debug, Deserialize)]
+pub struct PlotData {
+    pub date: DateTime<Utc>,
+    pub mean: f32,
+    pub std_dev: f32,
 }
 
-#[derive(Serialize, Debug, Deserialize)]
+#[derive(Clone, Serialize, Debug, Deserialize)]
 pub struct Results {
     results: Vec<Result>,
 }
 
-#[derive(Serialize, Debug, Deserialize)]
+#[derive(Clone, Serialize, Debug, Deserialize)]
 struct Result {
     command: String,
     mean: f32,
