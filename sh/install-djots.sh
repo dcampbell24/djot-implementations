@@ -5,13 +5,13 @@ go install github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
 
 # Haskell
 cabal update
-cabal install djot # Installed in: ~/.cabal/bin/djoths
+cabal install djot  --upgrade-dependencies --overwrite-policy=always # Installed in: ~/.cabal/bin/djoths
 
 # JavaScript
-npm install -g @djot/djot # Installed in: ~/.nvm/versions/node/v22.11.0/bin/djot
+npm install --omit=dev -g @djot/djot@latest # Installed in: ~/.nvm/versions/node/v22.11.0/bin/djot
 
 # Lua
-luarocks install --local djot # Installed in: ~/.luarocks/bin/djot
+luarocks install --no-doc --local djot # Installed in: ~/.luarocks/bin/djot
 
 # Rust
 rustup update stable
