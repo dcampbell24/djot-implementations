@@ -1,8 +1,9 @@
 #!/bin/dash
 
-# sh/benchmarks.sh
-# cargo run --release --bin update-graph-data
-# cargo run --release --bin graph-benchmarks
+sh/install-djots.sh
+sh/benchmarks.sh
+cargo run --release --bin update-graph-data
+cargo run --release --bin graph-benchmarks
 
 cat > tmp/all-benchmarks.md <<EOF
 # Djot Implementations

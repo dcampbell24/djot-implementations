@@ -1,7 +1,7 @@
-#!/bin/dash -e
+#!/bin/dash
 
 # Go
-go install github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
+go -v -x install github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
 
 # Haskell
 cabal update
