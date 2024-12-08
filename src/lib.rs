@@ -28,7 +28,7 @@ impl From<Results> for Plot {
                 .or_insert(vec![plot_data_]);
         }
 
-        let output = Command::new("./cpu-name.sh").output().unwrap();
+        let output = Command::new("./sh/cpu-name.sh").output().unwrap();
         let mut cpu = String::from_utf8_lossy(&output.stdout).into_owned();
         cpu = cpu.trim().to_string();
 
