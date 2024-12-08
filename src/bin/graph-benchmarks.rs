@@ -40,7 +40,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     let root = BitMapBackend::new(file_out, (1024, 768)).into_drawing_area();
     root.fill(&GREY_A100)?;
     root.titled(
-        &format!("Time to Render {render_file} ({file_size}) to html (ms)"),
+        &format!("Time to Render {render_file} ({file_size}) into html (ms)"),
         ("sans-serif", 40.0),
     )?;
 
