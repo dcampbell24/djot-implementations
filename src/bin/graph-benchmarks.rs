@@ -116,9 +116,16 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
 
 /// Formats a number of bytes into a human readable SI-prefixed size.
 /// Returns a tuple of `(quantity, units)`.
+#[allow(
+    clippy::cast_possible_truncation,
+    clippy::cast_precision_loss,
+    clippy::cast_sign_loss,
+    clippy::missing_panics_doc
+)]
+#[must_use]
 pub fn human_readable_bytes(bytes: u64) -> (f32, &'static str) {
     static UNITS: [&str; 7] = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB"];
     let bytes = bytes as f32;
     let i = ((bytes.log2() / 10.0) as usize).min(UNITS.len() - 1);
-    (bytes / 1024_f32.powi(i as i32), UNITS[i])
+    (bytes / 1024_f32.powi(i32::try_from(i).unwrap()), UNITS[i])
 }
