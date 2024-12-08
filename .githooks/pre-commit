@@ -1,0 +1,4 @@
+#!/bin/dash -e
+
+cargo clippy
+cargo fmt --all --check
