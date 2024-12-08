@@ -108,7 +108,9 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
         .draw()?;
 
     // To avoid the IO failure being ignored silently, we manually call the present function
-    root.present().expect("Unable to write result to file, please make sure 'tmp' dir exists under current dir");
+    root.present().expect(
+        "Unable to write result to file, please make sure 'tmp' dir exists under current dir",
+    );
     println!("Result has been saved to {file_out}");
 
     Ok(())
