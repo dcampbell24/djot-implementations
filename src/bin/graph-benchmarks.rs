@@ -1,4 +1,4 @@
-use std::{fs, process::Command};
+use std::fs::{self, File};
 
 use anyhow::Ok;
 use chrono::Days;
@@ -31,16 +31,14 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     let data_1: String = fs::read_to_string(file_in)?;
     let data_1: Plot = ron::from_str(&data_1)?;
 
-    let file_size = Command::new("./file-size.sh")
-        .arg(format!("djot/{render_file}"))
-        .output()?
-        .stdout;
-    let file_size = String::from_utf8_lossy(&file_size).trim().to_string();
+    let file = File::open(format!("djot/{render_file}"))?;
+    let metadata = file.metadata()?;
+    let (file_size, suffix) = human_readable_bytes(metadata.len());
 
     let root = BitMapBackend::new(file_out, (1024, 768)).into_drawing_area();
     root.fill(&GREY_A100)?;
     root.titled(
-        &format!("Time to Render {render_file} ({file_size}) into html (ms)"),
+        &format!("Time to Render {render_file} ({file_size:.2}{suffix}) into html (ms)"),
         ("sans-serif", 40.0),
     )?;
 
@@ -114,4 +112,13 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     println!("Result has been saved to {file_out}");
 
     Ok(())
+}
+
+/// Formats a number of bytes into a human readable SI-prefixed size.
+/// Returns a tuple of `(quantity, units)`.
+pub fn human_readable_bytes(bytes: u64) -> (f32, &'static str) {
+    static UNITS: [&str; 7] = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB"];
+    let bytes = bytes as f32;
+    let i = ((bytes.log2() / 10.0) as usize).min(UNITS.len() - 1);
+    (bytes / 1024_f32.powi(i as i32), UNITS[i])
 }
