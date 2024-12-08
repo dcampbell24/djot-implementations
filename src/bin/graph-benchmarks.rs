@@ -1,133 +1,105 @@
-use std::fs;
+use std::fs::{self, File};
 
 use anyhow::Ok;
-use chrono::{DateTime, Days, ParseError, Utc};
+use chrono::Days;
 use djot_implementations::Plot;
-use full_palette::{GREY_A100, GREY_A200, PURPLE};
+use full_palette::GREY_A100;
 use plotters::prelude::*;
 
-fn parse_time(t: &str) -> Result<DateTime<Utc>, ParseError> {
-    DateTime::parse_from_str(t, "%F %H:%M:%S %:z").map(|dt| dt.to_utc())
-}
-
-const OUT_FILE_NAME: &str = "plotters-graphs/pandoc-manual-benchmarks.png";
+// IBM Design Library
+const BLUE_IBM: RGBColor = RGBColor(0x64, 0x8F, 0xFF);
+const PURPLE_IBM: RGBColor = RGBColor(0x78, 0x5E, 0xF0);
+const RED_IBM: RGBColor = RGBColor(0xDC, 0x26, 0x7F);
+const ORANGE_IBM: RGBColor = RGBColor(0xFE, 0x61, 0x00);
+const YELLOW_IBM: RGBColor = RGBColor(0xFF, 0xB0, 0x00);
 
 fn main() -> anyhow::Result<()> {
-    let data_1: String = fs::read_to_string("benchmarks-1.ron")?;
+    make_graph(
+        "pandoc-manual.dj",
+        "tmp/pandoc-manual-benchmarks.ron",
+        "tmp/pandoc-manual-benchmarks.png",
+    )?;
+    make_graph(
+        "tartan-wikipedia.dj",
+        "tmp/tartan-wikipedia-benchmarks.ron",
+        "tmp/tartan-wikipedia-benchmarks.png",
+    )?;
+    Ok(())
+}
+
+fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Result<()> {
+    let data_1: String = fs::read_to_string(file_in)?;
     let data_1: Plot = ron::from_str(&data_1)?;
 
-    let go_data = get_data_go();
-    let haskell_data = get_data_haskell();
-    let javascript_data = get_data_javascript();
-    let lua_data = get_data_lua();
-    let rust_data = get_data_rust();
+    let file = File::open(format!("tmp/{render_file}"))?;
+    let metadata = file.metadata()?;
+    let (file_size, suffix) = human_readable_bytes(metadata.len());
 
-    let root = BitMapBackend::new(OUT_FILE_NAME, (1024, 768)).into_drawing_area();
-    root.fill(&GREY_A200)?;
+    let root = BitMapBackend::new(file_out, (1024, 768)).into_drawing_area();
+    root.fill(&GREY_A100)?;
     root.titled(
-        "Time to Render pandoc-manual.dj to html (ms)",
+        &format!("Time to Render {render_file} ({file_size:.2}{suffix}) into html (ms)"),
         ("sans-serif", 40.0),
     )?;
 
-    let to_date = parse_time(go_data.first().unwrap().0)?
+    let to_date = data_1.plot_data["Go"]
+        .first()
+        .unwrap()
+        .date
         .checked_add_days(Days::new(1))
         .unwrap();
-    let from_date = parse_time(go_data.last().unwrap().0)?
+
+    let from_date = data_1.plot_data["Go"]
+        .last()
+        .unwrap()
+        .date
         .checked_sub_days(Days::new(1))
         .unwrap();
 
     let (_upper, lower) = root.split_vertically(50);
 
+    let data = data_1.plot_data.values();
+
+    #[allow(clippy::cast_possible_truncation, clippy::cast_precision_loss)]
+    let max = data
+        .map(|data| {
+            data.iter()
+                .map(|data| ((data.mean + data.std_dev) * 1_000.0) as i32)
+                .max()
+                .unwrap()
+        })
+        .max()
+        .unwrap() as f32;
+
     let mut chart = ChartBuilder::on(&lower)
         .x_label_area_size(40)
         .y_label_area_size(40)
-        .caption(
-            "on AMD EPYC 7763 64-Core Processor",
-            ("sans-serif", 20).into_font(),
-        )
-        .build_cartesian_2d(from_date..to_date, 0f32..155f32)?;
+        .caption(format!("on {}", data_1.cpu), ("sans-serif", 20).into_font())
+        .build_cartesian_2d(from_date..to_date, 0f32..max)?;
 
-    chart.configure_mesh().light_line_style(GREY_A200).draw()?;
+    chart.configure_mesh().light_line_style(GREY_A100).draw()?;
 
-    chart
-        .draw_series(go_data.iter().map(|x| {
-            CandleStick::new(
-                parse_time(x.0).unwrap(),
-                x.1,
-                x.2,
-                x.3,
-                x.4,
-                RED.filled(),
-                RED,
-                15,
-            )
-        }))?
-        .label("Go")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], RED));
+    let commands = ["Go", "Haskell", "JavaScript", "Lua", "Rust"];
+    let colors = [RED_IBM, ORANGE_IBM, YELLOW_IBM, BLUE_IBM, PURPLE_IBM];
+    for (command, color) in commands.iter().zip(colors) {
+        let data = &data_1.plot_data[*command];
 
-    chart
-        .draw_series(haskell_data.iter().map(|x| {
-            CandleStick::new(
-                parse_time(x.0).unwrap(),
-                x.1,
-                x.2,
-                x.3,
-                x.4,
-                YELLOW.filled(),
-                YELLOW,
-                15,
-            )
-        }))?
-        .label("Haskell")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], YELLOW));
-
-    chart
-        .draw_series(javascript_data.iter().map(|x| {
-            CandleStick::new(
-                parse_time(x.0).unwrap(),
-                x.1,
-                x.2,
-                x.3,
-                x.4,
-                GREEN.filled(),
-                GREEN,
-                15,
-            )
-        }))?
-        .label("JavaScript")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], GREEN));
-
-    chart
-        .draw_series(lua_data.iter().map(|x| {
-            CandleStick::new(
-                parse_time(x.0).unwrap(),
-                x.1,
-                x.2,
-                x.3,
-                x.4,
-                BLUE.filled(),
-                BLUE,
-                15,
-            )
-        }))?
-        .label("Lua")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], BLUE));
-
-    chart
-        .draw_series(rust_data.iter().map(|x| {
-            CandleStick::new(
-                parse_time(x.0).unwrap(),
-                x.1,
-                x.2,
-                x.3,
-                x.4,
-                PURPLE.filled(),
-                PURPLE,
-                15,
-            )
-        }))?
-        .label("Rust")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], PURPLE));
+        chart
+            .draw_series(data.iter().map(|data| {
+                CandleStick::new(
+                    data.date,
+                    data.mean * 1_000.0,
+                    (data.mean + data.std_dev) * 1_000.0,
+                    (data.mean - data.std_dev) * 1_000.0,
+                    data.mean * 1_000.0,
+                    color.filled(),
+                    color,
+                    15,
+                )
+            }))?
+            .label(*command)
+            .legend(move |(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], color));
+    }
 
     chart
         .configure_series_labels()
@@ -136,28 +108,26 @@ fn main() -> anyhow::Result<()> {
         .draw()?;
 
     // To avoid the IO failure being ignored silently, we manually call the present function
-    root.present().expect("Unable to write result to file, please make sure 'plotters-graphs' dir exists under current dir");
-    println!("Result has been saved to {OUT_FILE_NAME}");
+    root.present().expect(
+        "Unable to write result to file, please make sure 'tmp' dir exists under current dir",
+    );
+    println!("Result has been saved to {file_out}");
 
     Ok(())
 }
 
-fn get_data_go() -> Vec<(&'static str, f32, f32, f32, f32)> {
-    vec![("2024-11-29 16:54:45-05:00", 1.1, 1.0, 2.2, 1.1)]
-}
-
-fn get_data_haskell() -> Vec<(&'static str, f32, f32, f32, f32)> {
-    vec![("2024-11-29 16:54:45-05:00", 42.3, 41.9, 42.7, 42.3)]
-}
-
-fn get_data_javascript() -> Vec<(&'static str, f32, f32, f32, f32)> {
-    vec![("2024-11-29 16:54:45-05:00", 127.8, 119.8, 136.8, 127.8)]
-}
-
-fn get_data_lua() -> Vec<(&'static str, f32, f32, f32, f32)> {
-    vec![("2024-11-29 16:54:45-05:00", 149.1, 147.0, 152.9, 149.1)]
-}
-
-fn get_data_rust() -> Vec<(&'static str, f32, f32, f32, f32)> {
-    vec![("2024-11-29 16:54:45-05:00", 6.0, 5.9, 8.2, 6.0)]
+/// Formats a number of bytes into a human readable SI-prefixed size.
+/// Returns a tuple of `(quantity, units)`.
+#[allow(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_precision_loss,
+    clippy::cast_sign_loss
+)]
+#[must_use]
+pub fn human_readable_bytes(bytes: u64) -> (f32, &'static str) {
+    static UNITS: [&str; 7] = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB"];
+    let bytes = bytes as f32;
+    let i = ((bytes.log2() / 10.0) as usize).min(UNITS.len() - 1);
+    (bytes / 1024_f32.powi(i as i32), UNITS[i])
 }
