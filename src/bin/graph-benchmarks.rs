@@ -120,8 +120,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     clippy::cast_possible_truncation,
     clippy::cast_possible_wrap,
     clippy::cast_precision_loss,
-    clippy::cast_sign_loss,
-    clippy::missing_panics_doc
+    clippy::cast_sign_loss
 )]
 #[must_use]
 pub fn human_readable_bytes(bytes: u64) -> (f32, &'static str) {
