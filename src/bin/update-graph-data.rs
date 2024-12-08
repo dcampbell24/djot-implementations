@@ -7,12 +7,12 @@ fn main() -> anyhow::Result<()> {
     // read the new graph data and append it to the old.
     for (json, ron) in [
         (
-            "json/pandoc-manual-benchmarks.json",
-            "ron/pandoc-manual-benchmarks.ron",
+            "tmp/pandoc-manual-benchmarks.json",
+            "tmp/pandoc-manual-benchmarks.ron",
         ),
         (
-            "json/tartan-wikipedia-benchmarks.json",
-            "ron/tartan-wikipedia-benchmarks.ron",
+            "tmp/tartan-wikipedia-benchmarks.json",
+            "tmp/tartan-wikipedia-benchmarks.ron",
         ),
     ] {
         let data: String = fs::read_to_string(json)?;

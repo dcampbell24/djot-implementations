@@ -16,13 +16,13 @@ const YELLOW_IBM: RGBColor = RGBColor(0xFF, 0xB0, 0x00);
 fn main() -> anyhow::Result<()> {
     make_graph(
         "pandoc-manual.dj",
-        "ron/pandoc-manual-benchmarks.ron",
-        "plotters-graphs/pandoc-manual-benchmarks.png",
+        "tmp/pandoc-manual-benchmarks.ron",
+        "tmp/pandoc-manual-benchmarks.png",
     )?;
     make_graph(
         "tartan-wikipedia.dj",
-        "ron/tartan-wikipedia-benchmarks.ron",
-        "plotters-graphs/tartan-wikipedia-benchmarks.png",
+        "tmp/tartan-wikipedia-benchmarks.ron",
+        "tmp/tartan-wikipedia-benchmarks.png",
     )?;
     Ok(())
 }
@@ -31,7 +31,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     let data_1: String = fs::read_to_string(file_in)?;
     let data_1: Plot = ron::from_str(&data_1)?;
 
-    let file = File::open(format!("djot/{render_file}"))?;
+    let file = File::open(format!("tmp/{render_file}"))?;
     let metadata = file.metadata()?;
     let (file_size, suffix) = human_readable_bytes(metadata.len());
 
@@ -108,7 +108,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
         .draw()?;
 
     // To avoid the IO failure being ignored silently, we manually call the present function
-    root.present().expect("Unable to write result to file, please make sure 'plotters-graphs' dir exists under current dir");
+    root.present().expect("Unable to write result to file, please make sure 'tmp' dir exists under current dir");
     println!("Result has been saved to {file_out}");
 
     Ok(())
