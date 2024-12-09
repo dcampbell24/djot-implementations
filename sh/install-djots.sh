@@ -1,7 +1,7 @@
 #!/bin/dash
 
 # Go
-go install -v -x github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
+go install -v github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
 
 # Haskell
 ghcup upgrade
