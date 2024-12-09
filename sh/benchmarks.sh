@@ -1,11 +1,11 @@
-#!/bin/dash
+#!/bin/dash -e
 
-mkdir tmp
+mkdir tmp || true
 
 PANDOC_MANUAL=https://github.com/jgm/djot/files/11900633/pandoc-manual.txt
 PANDOC_MANUAL_DJ=tmp/pandoc-manual.dj
 
-wget --quiet --no-clobber --output-document=$PANDOC_MANUAL_DJ $PANDOC_MANUAL
+wget --quiet --no-clobber --output-document=$PANDOC_MANUAL_DJ $PANDOC_MANUAL || true
 
 hyperfine --warmup 20 --shell=none --export-markdown tmp/pandoc-manual-benchmarks.md \
 --sort mean-time \
@@ -20,7 +20,7 @@ TARTAN_WIKIPEDIA=https://en.wikipedia.org/wiki/Tartan
 TARTAN_WIKIPEDIA_HTML=tmp/tartan-wikipedia.html
 TARTAN_WIKIPEDIA_DJ=tmp/tartan-wikipedia.dj
 
-wget --quiet --no-clobber --output-document=$TARTAN_WIKIPEDIA_HTML $TARTAN_WIKIPEDIA
+wget --quiet --no-clobber --output-document=$TARTAN_WIKIPEDIA_HTML $TARTAN_WIKIPEDIA || true
 pandoc --from=html --to=djot --output=$TARTAN_WIKIPEDIA_DJ $TARTAN_WIKIPEDIA_HTML
 
 hyperfine --warmup 20 --shell=none --export-markdown tmp/tartan-wikipedia-benchmarks.md \
