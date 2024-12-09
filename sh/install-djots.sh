@@ -1,17 +1,23 @@
-#!/bin/dash -e
+#!/bin/dash
 
 # Go
-go install github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
+go install -v -x github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
 
 # Haskell
+ghcup upgrade
+ghcup install ghc
+ghcup set ghc
 cabal update
-cabal install djot # Installed in: ~/.cabal/bin/djoths
+cabal install djot  --upgrade-dependencies --overwrite-policy=always # Installed in: ~/.cabal/bin/djoths
 
 # JavaScript
-npm install -g @djot/djot # Installed in: ~/.nvm/versions/node/v22.11.0/bin/djot
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+nvm install node
+nvm alias default node
+npm install --omit=dev -g @djot/djot@latest # Installed in: ~/.nvm/versions/node/v22.11.0/bin/djot
 
 # Lua
-luarocks install --local djot # Installed in: ~/.luarocks/bin/djot
+luarocks install --no-doc --local djot # Installed in: ~/.luarocks/bin/djot
 
 # Rust
 rustup update stable
