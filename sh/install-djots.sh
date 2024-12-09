@@ -4,6 +4,9 @@
 go -v -x install github.com/sivukhin/godjot@latest # Installed in: ~/go/bin/godjot
 
 # Haskell
+ghcup upgrade
+ghcup install ghc
+ghcup set ghc
 cabal update
 cabal install djot  --upgrade-dependencies --overwrite-policy=always # Installed in: ~/.cabal/bin/djoths
 
