@@ -46,6 +46,8 @@ Time to render tartan-wikipedia.dj ($(echo $(du -h tmp/tartan-wikipedia.dj) | se
 
 $(cat tmp/tartan-wikipedia-benchmarks.md)
 
+### Tools
+
 $(go version)  
 Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)  
 $(ghc --version)  
