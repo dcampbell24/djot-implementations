@@ -36,6 +36,8 @@ hyperfine --warmup 20 --shell=none --export-markdown tmp/tartan-wikipedia-benchm
 --command-name Rust "jotdown $TARTAN_WIKIPEDIA_DJ"
 
 cat > tmp/benchmarks.md <<EOF
+### Running on $(lscpu | grep "Model name: [-|(|)| |a-z|A-Z|0-9]*" | sed -e 's/Model name: *//') at $(date --rfc-3339=seconds)  
+
 Time to render pandoc-manual.dj ($(echo $(du -h tmp/pandoc-manual.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z/-]+/\1/')) into html:
 
 $(cat tmp/pandoc-manual-benchmarks.md)
@@ -44,7 +46,6 @@ Time to render tartan-wikipedia.dj ($(echo $(du -h tmp/tartan-wikipedia.dj) | se
 
 $(cat tmp/tartan-wikipedia-benchmarks.md)
 
-Running on $(lscpu | grep "Model name: [-|(|)| |a-z|A-Z|0-9]*" | sed -e 's/Model name: *//') at $(date --rfc-3339=seconds)  
 $(go version)  
 Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)  
 $(ghc --version)  
