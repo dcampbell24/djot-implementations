@@ -53,7 +53,7 @@ node version $(node --version)
 JavaScript $(djot --version)  
 $(lua -v)  
 Lua $($HOME/.luarocks/bin/djot --version)  
-$(rustc --version)
+$(rustc --version)  
 EOF
 
 jotdown --version 2>> tmp/benchmarks.md
