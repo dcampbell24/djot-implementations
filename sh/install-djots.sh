@@ -14,7 +14,7 @@ cabal install djot  --upgrade-dependencies --overwrite-policy=always # Installed
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 nvm install node
 nvm alias default node
-npm install --omit=dev -g @djot/djot@latest # Installed in: ~/.nvm/versions/node/v22.11.0/bin/djot
+npm install --omit=dev --global @djot/djot@latest # Installed in: ~/.nvm/versions/node/v22.11.0/bin/djot
 
 # Lua
 luarocks install --no-doc --local djot # Installed in: ~/.luarocks/bin/djot
