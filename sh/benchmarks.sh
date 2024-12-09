@@ -7,12 +7,15 @@ PANDOC_MANUAL_DJ=tmp/pandoc-manual.dj
 
 wget --quiet --no-clobber --output-document=$PANDOC_MANUAL_DJ $PANDOC_MANUAL || true
 
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+DJOT_JS=$(echo $(nvm which current) | sed -e 's/node$/djot/')
+
 hyperfine --warmup 20 --shell=none --export-markdown tmp/pandoc-manual-benchmarks.md \
 --sort mean-time \
 --export-json tmp/pandoc-manual-benchmarks.json \
 --command-name Go "$HOME/go/bin/godjot -from $PANDOC_MANUAL_DJ" \
 --command-name Haskell "djoths $PANDOC_MANUAL_DJ" \
---command-name JavaScript "djot $PANDOC_MANUAL_DJ" \
+--command-name JavaScript "$DJOT_JS $PANDOC_MANUAL_DJ" \
 --command-name Lua "$HOME/.luarocks/bin/djot $PANDOC_MANUAL_DJ" \
 --command-name Rust "jotdown $PANDOC_MANUAL_DJ"
 
@@ -28,7 +31,7 @@ hyperfine --warmup 20 --shell=none --export-markdown tmp/tartan-wikipedia-benchm
 --export-json tmp/tartan-wikipedia-benchmarks.json \
 --command-name Go "$HOME/go/bin/godjot -from $TARTAN_WIKIPEDIA_DJ" \
 --command-name Haskell "djoths $TARTAN_WIKIPEDIA_DJ" \
---command-name JavaScript "djot $TARTAN_WIKIPEDIA_DJ" \
+--command-name JavaScript "$DJOT_JS $TARTAN_WIKIPEDIA_DJ" \
 --command-name Lua "$HOME/.luarocks/bin/djot $TARTAN_WIKIPEDIA_DJ" \
 --command-name Rust "jotdown $TARTAN_WIKIPEDIA_DJ"
 
