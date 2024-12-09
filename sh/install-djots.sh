@@ -8,6 +8,7 @@ cabal update
 cabal install djot  --upgrade-dependencies --overwrite-policy=always # Installed in: ~/.cabal/bin/djoths
 
 # JavaScript
+nvm install node
 npm install --omit=dev -g @djot/djot@latest # Installed in: ~/.nvm/versions/node/v22.11.0/bin/djot
 
 # Lua

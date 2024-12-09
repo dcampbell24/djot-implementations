@@ -14,7 +14,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 # JavaScript
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-nvm install 22
 
 # Lua
 ./install-lua-debian.sh
