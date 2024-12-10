@@ -6,12 +6,15 @@ use djot_implementations::Plot;
 use full_palette::GREY_A100;
 use plotters::prelude::*;
 
-// IBM Design Library
-const BLUE_IBM: RGBColor = RGBColor(0x64, 0x8F, 0xFF);
-const PURPLE_IBM: RGBColor = RGBColor(0x78, 0x5E, 0xF0);
-const RED_IBM: RGBColor = RGBColor(0xDC, 0x26, 0x7F);
-const ORANGE_IBM: RGBColor = RGBColor(0xFE, 0x61, 0x00);
-const YELLOW_IBM: RGBColor = RGBColor(0xFF, 0xB0, 0x00);
+// Paul Tol's Notes
+// https://personal.sron.nl/~pault/
+const BLUE_BRIGHT: RGBColor = RGBColor(0x44, 0x77, 0xAA);
+const CYAN_BRIGHT: RGBColor = RGBColor(0x66, 0xCC, 0xEE);
+const GREEN_BRIGHT: RGBColor = RGBColor(0x22, 0x88, 0x33);
+const YELLOW_BRIGHT: RGBColor = RGBColor(0xCC, 0xBB, 0x44);
+const RED_BRIGHT: RGBColor = RGBColor(0xEE, 0x66, 0x77);
+const _PURPLE_BRIGHT: RGBColor = RGBColor(0xAA, 0x33, 0x77);
+const _GREY_BRIGHT: RGBColor = RGBColor(0xBB, 0xBB, 0xBB);
 
 fn main() -> anyhow::Result<()> {
     make_graph(
@@ -80,7 +83,13 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     chart.configure_mesh().light_line_style(GREY_A100).draw()?;
 
     let commands = ["Go", "Haskell", "JavaScript", "Lua", "Rust"];
-    let colors = [RED_IBM, ORANGE_IBM, YELLOW_IBM, BLUE_IBM, PURPLE_IBM];
+    let colors = [
+        RED_BRIGHT,
+        YELLOW_BRIGHT,
+        GREEN_BRIGHT,
+        CYAN_BRIGHT,
+        BLUE_BRIGHT,
+    ];
     for (command, color) in commands.iter().zip(colors) {
         let data = &data_1.plot_data[*command];
 
