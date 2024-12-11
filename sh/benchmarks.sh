@@ -1,4 +1,4 @@
-#!/bin/dash -e
+#!/bin/sh -e
 
 mkdir tmp || true
 
