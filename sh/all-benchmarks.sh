@@ -12,9 +12,9 @@ This repository benchmarks the various Djot implementations and generates a repo
 
 ## Benchmarks
 
-![pandoc manual benchmarks](pandoc-manual-benchmarks.png "Pandoc Manual Benchmarks")
+![pandoc manual benchmarks](benchmark-files/pandoc-manual-benchmarks.png "Pandoc Manual Benchmarks")
 
-![tartan wikipedia benchmarks](tartan-wikipedia-benchmarks.png "Tartan Wikipedia Benchmarks")
+![tartan wikipedia benchmarks](benchmark-files/tartan-wikipedia-benchmarks.png "Tartan Wikipedia Benchmarks")
 
 EOF
 
