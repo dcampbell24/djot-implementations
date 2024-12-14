@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+echo GOPATH=$GOPATH
+echo GOBIN=$GOBIN
+
 mkdir tmp || true
 
 PANDOC_MANUAL_DJ=benchmark-files/pandoc-manual.dj
