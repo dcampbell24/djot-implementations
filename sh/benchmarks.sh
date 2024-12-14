@@ -8,6 +8,7 @@ PANDOC_MANUAL_DJ=benchmark-files/pandoc-manual.dj
 DJOT_JS=$(echo $(nvm which current) | sed -e 's/node$/djot/')
 
 hyperfine --warmup 20 --shell=none --export-markdown tmp/pandoc-manual-benchmarks.md \
+--show-output \
 --sort mean-time \
 --export-json tmp/pandoc-manual-benchmarks.json \
 --command-name Go "$HOME/go/bin/godjot -from $PANDOC_MANUAL_DJ" \
