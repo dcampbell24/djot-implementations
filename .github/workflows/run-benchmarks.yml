@@ -20,7 +20,7 @@ jobs:
         run: |
           djot-implementations/sh/install-djots.sh
 
-      - name: Download Files, Run Pandoc, Run Benchmarks, Save Markdown File
+      - name: Run Benchmarks, Save Markdown File
         run: |
           djot-implementations/sh/benchmarks.sh
 
