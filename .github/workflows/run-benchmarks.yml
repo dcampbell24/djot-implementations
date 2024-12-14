@@ -12,10 +12,6 @@ jobs:
       - name: Download djot-implementations
         run: git clone https://github.com/dcampbell24/djot-implementations.git
 
-      - name: Install Pandoc
-        run: |
-          djot-implementations/sh/install-pandoc-debian.sh
-
       - name: Install Lua and LuaRocks
         run: |
           djot-implementations/sh/install-lua-debian.sh
