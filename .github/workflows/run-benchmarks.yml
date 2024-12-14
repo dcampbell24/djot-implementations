@@ -10,19 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download djot-implementations
-        run: git clone https://github.com/dcampbell24/djot-implementations.git
+        run: |
+          git clone https://github.com/dcampbell24/djot-implementations.git
+          cd djot-implementations
 
       - name: Install Lua and LuaRocks
         run: |
-          djot-implementations/sh/install-lua-debian.sh
+          sh/install-lua-debian.sh
 
       - name: Install Djots and Hyperfine
         run: |
-          djot-implementations/sh/install-djots.sh
+          sh/install-djots.sh
 
       - name: Run Benchmarks, Save Markdown File
         run: |
-          djot-implementations/sh/benchmarks.sh
+          sh/benchmarks.sh
 
       - name: cat Markdown File
         run: |
