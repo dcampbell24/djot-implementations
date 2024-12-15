@@ -49,7 +49,7 @@ $(ghc --version)
 Haskell djot $(ls $HOME/.cabal/packages/hackage.haskell.org/djot/)  
 node version $(node --version)  
 JavaScript $(djot --version)  
-$(lua -v)  
+$(luajit -v | sed -r 's/([0-9.]+)[() .a-zA-Z/0-9:-]+/\1/')  
 Lua $($HOME/.luarocks/bin/djot --version)  
 $(rustc --version)  
 EOF
