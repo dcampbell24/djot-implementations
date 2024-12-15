@@ -60,7 +60,7 @@ The Glorious Glasgow Haskell Compilation System, version 9.4.8
 Haskell djot 0.1.2.2  
 node version v23.3.0  
 JavaScript djot 0.3.1  
-LuaJIT 2.1.1732813678  
+LuaJIT 2.1.0-beta3  
 Lua djot 0.2.1  
 rustc 1.83.0 (90b35a623 2024-11-26)  
 jotdown v0.7.0
