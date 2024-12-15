@@ -1,6 +1,6 @@
 use std::fs::{self, File};
 
-use anyhow::Ok;
+use anyhow::{Context, Ok};
 use chrono::Days;
 use djot_implementations::Plot;
 use full_palette::GREY_A100;
@@ -31,10 +31,11 @@ fn main() -> anyhow::Result<()> {
 }
 
 fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Result<()> {
-    let data_1: String = fs::read_to_string(file_in)?;
+    let data_1: String = fs::read_to_string(file_in).context(format!("Open {file_in}"))?;
     let data_1: Plot = ron::from_str(&data_1)?;
 
-    let file = File::open(format!("tmp/{render_file}"))?;
+    let file = File::open(format!("benchmark-files/{render_file}"))
+        .context(format!("Open {render_file}"))?;
     let metadata = file.metadata()?;
     let (file_size, suffix) = human_readable_bytes(metadata.len());
 
