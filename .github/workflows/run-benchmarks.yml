@@ -1,12 +1,12 @@
-name: Djot Implementations
-run-name: Djot Implementations
+name: Run Benchmarks
+run-name: Run Benchmarks
 on:
   schedule:
     - cron: "13 * 1 * *"
 
 jobs:
   implementations:
-    name: Djot Implementations
+    name: Run Benchmarks
     runs-on: ubuntu-latest
     steps:
       - name: Download djot-implementations

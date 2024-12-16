@@ -1,5 +1,5 @@
-name: Djot Implementations
-run-name: Djot Implementations
+name: zizmor
+run-name: zizmor
 on:
   push
 
