@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download djot-implementations
-        run: git clone https://github.com/dcampbell24/djot-implementations.git
+        uses: actions/checkout@v4
 
       - name: Install Lua and LuaRocks
         run: |
