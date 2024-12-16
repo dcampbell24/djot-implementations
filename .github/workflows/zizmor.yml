@@ -1,0 +1,16 @@
+name: Djot Implementations
+run-name: Djot Implementations
+on:
+  push
+
+jobs:
+  implementations:
+    name: zizmor
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download djot-implementation, zizmor
+        run: |
+            cargo install zizmor
+            git clone https://github.com/dcampbell24/djot-implementations.git
+      - name: Run zizmor
+        run: zizmor djot-implementations/.github/workflows/*
