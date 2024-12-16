@@ -17,5 +17,5 @@ jobs:
       - name: Run zizmor
         run: |
             cd "$GITHUB_WORKSPACE"
-            git switch ${GITHUB_REF##*/}
+            git switch $GITHUB_REF_NAME
             zizmor --gh-token "$GITHUB_TOKEN" .github/workflows/*
