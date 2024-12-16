@@ -14,17 +14,17 @@ jobs:
 
       - name: Install Lua and LuaRocks
         run: |
-          djot-implementations/sh/install-lua-debian.sh
+          $GITHUB_WORKSPACE/sh/install-lua-debian.sh
 
       - name: Install Djots and Hyperfine
         run: |
-          djot-implementations/sh/install-djots.sh
+          $GITHUB_WORKSPACE/sh/install-djots.sh
 
       - name: Run Benchmarks, Save Markdown File
         run: |
-          cd djot-implementations
+          cd "$GITHUB_WORKSPACE"
           sh/benchmarks.sh
 
       - name: cat Markdown File
         run: |
-          cat  djot-implementations/tmp/benchmarks.md
+          cat  $GITHUB_WORKSPACE/tmp/benchmarks.md
