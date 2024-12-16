@@ -13,4 +13,4 @@ jobs:
             cargo install zizmor
             git clone https://github.com/dcampbell24/djot-implementations.git
       - name: Run zizmor
-        run: zizmor djot-implementations/.github/workflows/*
+        run: zizmor --gh-token "$GITHUB_TOKEN" djot-implementations/.github/workflows/*
