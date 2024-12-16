@@ -17,4 +17,4 @@ jobs:
       - name: Run zizmor
         run: |
             cd "$GITHUB_WORKSPACE"
-            zizmor --gh-token "$GITHUB_TOKEN" djot-implementations/.github/workflows/*
+            zizmor --gh-token "$GITHUB_TOKEN" .github/workflows/*
