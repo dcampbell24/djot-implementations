@@ -31,7 +31,7 @@ hyperfine --warmup 20 --shell=none --export-markdown tmp/tartan-wikipedia-benchm
 --command-name Rust "jotdown $TARTAN_WIKIPEDIA_DJ"
 
 cat > tmp/benchmarks.md <<EOF
-### Running on $(lscpu | grep "Model name: [-|(|)| |a-z|A-Z|0-9]*" | sed -e 's/Model name: *//') at $(date --rfc-3339=seconds)  
+### Running on $(lscpu | grep "Model name: [-|(|)| |a-z|A-Z|0-9]*" | sed -e 's/Model name: *//') at $(date --rfc-3339=seconds)
 
 Time to render pandoc-manual.dj ($(echo $(du -h benchmark-files/pandoc-manual.dj) | sed -r 's/([0-9.MK]+)[ .a-zA-Z/-]+/\1/')) into html:
 
@@ -49,7 +49,7 @@ $(ghc --version)
 Haskell djot $(ls $HOME/.cabal/packages/hackage.haskell.org/djot/)  
 node version $(node --version)  
 JavaScript $(djot --version)  
-$(luajit -v | sed -r 's/([0-9.]+)[() .a-zA-Z/0-9:-]+/\1/')  
+$(luajit -v | sed -r 's/([ .a-zA-Z0-9]+)(-[a-z0-9]+)[ .a-zA-Z0-9/():-]+/\1\2/')  
 Lua $($HOME/.luarocks/bin/djot --version)  
 $(rustc --version)  
 EOF
