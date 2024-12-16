@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        env:
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
 
       - name: Download zizmor
         run: cargo install zizmor
@@ -17,4 +19,5 @@ jobs:
       - name: Run zizmor
         run: |
             cd "$GITHUB_WORKSPACE"
+            git switch "$BRANCH_NAME"
             zizmor --gh-token "$GITHUB_TOKEN" .github/workflows/*
