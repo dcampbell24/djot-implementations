@@ -3,7 +3,6 @@ name: zizmor
 on:
   push:
   pull_request:
-    branches: ["**"]
 
 jobs:
   zizmor:
