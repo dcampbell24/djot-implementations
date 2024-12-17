@@ -20,7 +20,7 @@ jobs:
       - name: Run zizmor 🌈
         run: |
           cd "$GITHUB_WORKSPACE"
-          zizmor --gh-token "$GH_TOKEN" .github/workflows/*
+          zizmor --pedantic --gh-token "$GH_TOKEN" .github/workflows/*
 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
