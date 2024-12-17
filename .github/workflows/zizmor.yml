@@ -22,6 +22,7 @@ jobs:
             cd "$GITHUB_WORKSPACE"
             git switch "$GITHUB_REF_NAME"
             zizmor --gh-token "$GH_TOKEN" .github/workflows/*
+            echo "hello"
 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
