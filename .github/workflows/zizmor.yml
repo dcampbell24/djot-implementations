@@ -20,4 +20,7 @@ jobs:
         run: |
             cd "$GITHUB_WORKSPACE"
             git switch "$GITHUB_REF_NAME"
-            zizmor --gh-token "$GITHUB_TOKEN" .github/workflows/*
+            zizmor --gh-token "$GH_TOKEN" .github/workflows/*
+
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
