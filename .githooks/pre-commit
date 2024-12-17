@@ -2,3 +2,4 @@
 
 cargo clippy
 cargo fmt --all --check
+zizmor --offline .github/workflows/*
