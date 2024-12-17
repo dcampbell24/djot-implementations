@@ -1,0 +1,3 @@
+rules:
+  ref-confusion:
+    ignore:

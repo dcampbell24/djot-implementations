@@ -1,11 +1,11 @@
 name: Run Benchmarks
-run-name: Run Benchmarks
+
 on:
   schedule:
     - cron: "13 * 1 * *"
 
 jobs:
-  implementations:
+  benchmarks:
     name: Run Benchmarks
     runs-on: ubuntu-latest
     steps:

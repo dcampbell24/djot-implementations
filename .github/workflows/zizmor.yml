@@ -1,10 +1,12 @@
 name: zizmor
-run-name: zizmor
+
 on:
-  push
+  push:
+  pull_request:
+    branches: ["**"]
 
 jobs:
-  implementations:
+  zizmor:
     name: zizmor
     runs-on: ubuntu-latest
     steps:
@@ -14,8 +16,8 @@ jobs:
       - name: Download zizmor
         run: cargo install zizmor
 
-      - name: Run zizmor
+      - name: Run zizmor 🌈
         run: |
             cd "$GITHUB_WORKSPACE"
-            git switch $GITHUB_REF_NAME
-            zizmor --gh-token "$GITHUB_TOKEN" .github/workflows/*
+            git switch "$GITHUB_REF_NAME"
+            zizmor --config zizmor.yml --gh-token "$GITHUB_TOKEN" .github/workflows/*
