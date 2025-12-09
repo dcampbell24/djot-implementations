@@ -6,13 +6,13 @@ on:
 
 jobs:
   benchmarks:
+    name: Run Benchmarks
     permissions:
       security-events: write
       # required for workflows in private repositories
       # contents: read
       actions: read
 
-    name: Run Benchmarks
     runs-on: ubuntu-latest
     steps:
       - name: Download djot-implementations

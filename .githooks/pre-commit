@@ -1,4 +1,4 @@
-#!/bin/dash -e
+#!/bin/bash -xe
 
 cargo clippy
 cargo fmt --all --check

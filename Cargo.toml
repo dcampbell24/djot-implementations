@@ -1,8 +1,8 @@
 [package]
 name = "djot-implementations"
 version = "0.1.0"
-edition = "2021"
-rust-version = "1.77.2"
+edition = "2024"
+rust-version = "1.91"
 authors = ["David Campbell <dcampbell24@gmail.com>"]
 description = "Generates a graph of Djot implementations render time."
 license = "MIT OR Apache-2.0"
@@ -15,7 +15,7 @@ categories = ["command-line-utilities", "multimedia::images"]
 anyhow = "1"
 chrono = { version = "0.4", features = ["serde"] }
 plotters = "0.3"
-ron = "0.8.1"
+ron = "0.12"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
