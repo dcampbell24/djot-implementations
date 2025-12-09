@@ -2,10 +2,16 @@ name: Run Benchmarks
 
 on:
   schedule:
-    - cron: "13 * 1 * *"
+    - cron: "13 0 1 * *"
 
 jobs:
   benchmarks:
+    permissions:
+      security-events: write
+      # required for workflows in private repositories
+      # contents: read
+      actions: read
+
     name: Run Benchmarks
     runs-on: ubuntu-latest
     steps:

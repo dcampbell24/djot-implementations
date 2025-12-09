@@ -7,6 +7,12 @@ on:
 
 jobs:
   zizmor:
+    permissions:
+      security-events: write
+      # required for workflows in private repositories
+      # contents: read
+      actions: read
+
     name: zizmor
     runs-on: ubuntu-latest
     steps:
