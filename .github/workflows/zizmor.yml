@@ -8,13 +8,14 @@ on:
 jobs:
   zizmor:
     name: zizmor
+    runs-on: ubuntu-latest
+
     permissions:
       security-events: write
       # required for workflows in private repositories
       # contents: read
       actions: read
 
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # pin@v4
