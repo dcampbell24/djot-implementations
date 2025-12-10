@@ -10,6 +10,9 @@ jobs:
     name: zizmor
     runs-on: ubuntu-latest
 
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+
     permissions:
       security-events: write
       # required for workflows in private repositories
