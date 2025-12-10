@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: "13 0 1 * *"
 
+permissions:
+      security-events: write # An explanation.
+      actions: read # An explanation.
+
 jobs:
   benchmarks:
     name: Run Benchmarks
