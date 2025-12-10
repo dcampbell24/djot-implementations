@@ -13,8 +13,8 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
 
     permissions:
-      security-events: write
-      actions: read
+      security-events: write # An explanation.
+      actions: read # An explanation.
 
     steps:
       - name: Download djot-implementations
