@@ -24,5 +24,34 @@ rustup update stable
 rustup default stable
 cargo install jotdown # Installed in: ~/.cargo/bin/jotdown
 
+# PHP
+mkdir -p ~/.local/djot-php && cd ~/.local/djot-php
+composer require php-collective/djot --quiet 2>/dev/null || composer require php-collective/djot
+# Create CLI wrapper
+cat > djot-php <<'EOFPHP'
+#!/usr/bin/env php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Djot\DjotConverter;
+
+if ($argc < 2) {
+    fwrite(STDERR, "Usage: djot-php <file.dj>\n");
+    exit(1);
+}
+
+$file = $argv[1];
+if (!file_exists($file)) {
+    fwrite(STDERR, "File not found: $file\n");
+    exit(1);
+}
+
+$content = file_get_contents($file);
+$converter = new DjotConverter();
+echo $converter->convert($content);
+EOFPHP
+chmod +x djot-php
+cd - > /dev/null
+
 # Hyperfine
 cargo install hyperfine # Installed in: ~/.cargo/bin/hyperfine
