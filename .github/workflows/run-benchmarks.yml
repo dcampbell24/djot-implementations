@@ -26,10 +26,9 @@ jobs:
         with:
           persist-credentials: false
 
-      # Broken
-      #- name: Install Lua and LuaRocks
-      #  run: |
-      #    $GITHUB_WORKSPACE/sh/install-lua-debian.sh
+      - name: Install Lua and LuaRocks
+        run: |
+          $GITHUB_WORKSPACE/sh/install-lua-debian.sh
 
       - name: Install PHP and Composer
         run: |
