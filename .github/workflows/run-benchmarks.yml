@@ -30,6 +30,10 @@ jobs:
       #  run: |
       #    $GITHUB_WORKSPACE/sh/install-lua-debian.sh
 
+      - name: Install PHP and Composer
+        run: |
+          $GITHUB_WORKSPACE/sh/install-php-debian.sh
+
       - name: Install Djots and Hyperfine
         run: |
           $GITHUB_WORKSPACE/sh/install-djots.sh

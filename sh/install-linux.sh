@@ -18,5 +18,8 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 # Lua
 ./install-lua-debian.sh
 
+# PHP
+./install-php-debian.sh
+
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

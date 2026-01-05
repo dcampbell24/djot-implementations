@@ -27,7 +27,7 @@ cargo install jotdown # Installed in: ~/.cargo/bin/jotdown
 
 # PHP
 mkdir -p ~/.local/djot-php && cd ~/.local/djot-php
-composer require php-collective/djot --quiet 2>/dev/null || composer require php-collective/djot
+composer require php-collective/djot
 # Create CLI wrapper
 cat > djot-php <<'EOFPHP'
 #!/usr/bin/env php
