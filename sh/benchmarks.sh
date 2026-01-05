@@ -51,7 +51,7 @@ node version $(node --version)
 JavaScript $(djot --version)  
 $(lua -v | awk '{print $1, $2}')  
 Lua $($HOME/.luarocks/bin/djot --version)  
-PHP $(php --version | head -1)
+$(php --version | head -1 | awk '{print $1, $2}')  
 PHP djot $(composer show -d $HOME/.local/djot-php php-collective/djot 2>/dev/null | grep versions | awk '{print $2}')
 $(rustc --version)  
 EOF
