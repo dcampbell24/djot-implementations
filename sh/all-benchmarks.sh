@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 sh/install-djots.sh
 sh/benchmarks.sh

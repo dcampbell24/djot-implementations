@@ -3,18 +3,22 @@ use std::fs::{self, File};
 use anyhow::{Context, Ok};
 use chrono::Days;
 use djot_implementations::Plot;
-use full_palette::GREY_A100;
 use plotters::prelude::*;
 
-// Paul Tol's Notes
-// https://personal.sron.nl/~pault/
-const BLUE_BRIGHT: RGBColor = RGBColor(0x44, 0x77, 0xAA);
-const CYAN_BRIGHT: RGBColor = RGBColor(0x66, 0xCC, 0xEE);
-const GREEN_BRIGHT: RGBColor = RGBColor(0x22, 0x88, 0x33);
-const YELLOW_BRIGHT: RGBColor = RGBColor(0xCC, 0xBB, 0x44);
-const RED_BRIGHT: RGBColor = RGBColor(0xEE, 0x66, 0x77);
-const _PURPLE_BRIGHT: RGBColor = RGBColor(0xAA, 0x33, 0x77);
-const _GREY_BRIGHT: RGBColor = RGBColor(0xBB, 0xBB, 0xBB);
+/// The Muted qualitative color scheme of [Tol]. A color scheme for the
+/// color blind.
+///
+/// [Tol]: https://sronpersonalpages.nl/~pault/
+pub const INDIGO: RGBColor = RGBColor(0x33, 0x22, 0x88);
+pub const CYAN: RGBColor = RGBColor(0x88, 0xCC, 0xEE);
+pub const TEAL: RGBColor = RGBColor(0x44, 0xAA, 0x99);
+pub const GREEN: RGBColor = RGBColor(0x11, 0x77, 0x33);
+pub const OLIVE: RGBColor = RGBColor(0x99, 0x99, 0x33);
+pub const SAND: RGBColor = RGBColor(0xDD, 0xCC, 0x77);
+pub const ROSE: RGBColor = RGBColor(0xCC, 0x66, 0x77);
+pub const WINE: RGBColor = RGBColor(0x88, 0x22, 0x55);
+pub const PURPLE: RGBColor = RGBColor(0xAA, 0x44, 0x99);
+pub const PALE_GREY: RGBColor = RGBColor(0xEE, 0xEE, 0xEE);
 
 fn main() -> anyhow::Result<()> {
     make_graph(
@@ -40,7 +44,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     let (file_size, suffix) = human_readable_bytes(metadata.len());
 
     let root = BitMapBackend::new(file_out, (1024, 768)).into_drawing_area();
-    root.fill(&GREY_A100)?;
+    root.fill(&PALE_GREY)?;
     root.titled(
         &format!("Time to Render {render_file} ({file_size:.2}{suffix}) into html (ms)"),
         ("sans-serif", 40.0),
@@ -81,16 +85,10 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
         .caption(format!("on {}", data_1.cpu), ("sans-serif", 20).into_font())
         .build_cartesian_2d(from_date..to_date, 0f32..max)?;
 
-    chart.configure_mesh().light_line_style(GREY_A100).draw()?;
+    chart.configure_mesh().light_line_style(PALE_GREY).draw()?;
 
-    let commands = ["Go", "Haskell", "JavaScript", "Lua", "Rust"];
-    let colors = [
-        RED_BRIGHT,
-        YELLOW_BRIGHT,
-        GREEN_BRIGHT,
-        CYAN_BRIGHT,
-        BLUE_BRIGHT,
-    ];
+    let commands = ["Go", "Haskell", "JavaScript", "Rust"];
+    let colors = [WINE, SAND, GREEN, CYAN, INDIGO];
     for (command, color) in commands.iter().zip(colors) {
         let data = &data_1.plot_data[*command];
 
@@ -114,7 +112,7 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
     chart
         .configure_series_labels()
         .border_style(BLACK)
-        .background_style(GREY_A100)
+        .background_style(PALE_GREY)
         .draw()?;
 
     // To avoid the IO failure being ignored silently, we manually call the present function

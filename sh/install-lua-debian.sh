@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 # To install Lua:
 sudo apt-get --yes install luajit libluajit-5.1-dev

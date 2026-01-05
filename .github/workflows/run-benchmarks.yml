@@ -25,9 +25,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install Lua and LuaRocks
-        run: |
-          $GITHUB_WORKSPACE/sh/install-lua-debian.sh
+      # Broken
+      #- name: Install Lua and LuaRocks
+      #  run: |
+      #    $GITHUB_WORKSPACE/sh/install-lua-debian.sh
 
       - name: Install Djots and Hyperfine
         run: |
