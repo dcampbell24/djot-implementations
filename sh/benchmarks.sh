@@ -47,31 +47,19 @@ $(cat tmp/tartan-wikipedia-benchmarks.md)
 
 ### Tools
 
-<<<<<<< HEAD
-$(go version)
-Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)
-$(ghc --version)
-Haskell djot $(ls $HOME/.cabal/packages/hackage.haskell.org/djot/)
-node version $(node --version)
-JavaScript $(djot --version)
-$(luajit -v | sed -r 's/([ .a-zA-Z0-9]+)(-[a-z0-9]+)[ .a-zA-Z0-9/():-]+/\1\2/')
-Lua $($HOME/.luarocks/bin/djot --version)
-PHP $(php --version | head -1)
-PHP djot $(composer show -d $HOME/.local/djot-php php-collective/djot 2>/dev/null | grep versions | awk '{print $2}')
-$(rustc --version)
-=======
 $(go version)  
 Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)  
 $(ghc --version)  
 Haskell djot $(ls $HOME/.cabal/packages/hackage.haskell.org/djot/)  
 node version $(node --version)  
 JavaScript $(djot --version)  
+PHP $(php --version | head -1)
+PHP djot $(composer show -d $HOME/.local/djot-php php-collective/djot 2>/dev/null | grep versions | awk '{print $2}')
 $(rustc --version)  
->>>>>>> 4c52638 (Comment out lua and change colors.)
 EOF
+
+jotdown --version 2>> tmp/benchmarks.md
 
 # Broken
 # $(luajit -v | sed -r 's/([ .a-zA-Z0-9]+)(-[a-z0-9]+)[ .a-zA-Z0-9/():-]+/\1\2/')  
 # Lua $($HOME/.luarocks/bin/djot --version)  
-
-jotdown --version 2>> tmp/benchmarks.md
