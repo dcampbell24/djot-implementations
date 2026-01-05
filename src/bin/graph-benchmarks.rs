@@ -91,8 +91,8 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
         .light_line_style(PALE_GREY)
         .draw()?;
 
-    let commands = ["Go", "Haskell", "JavaScript", "PHP", "Rust"];
-    let colors = [WINE, SAND, GREEN, CYAN, INDIGO];
+    let commands = ["Go", "Haskell", "JavaScript", "Lua", "PHP", "Rust"];
+    let colors = [WINE, SAND, GREEN, TEAL, CYAN, INDIGO];
     for (command, color) in commands.iter().zip(colors) {
         let data = &data_1.plot_data[*command];
 

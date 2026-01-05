@@ -16,9 +16,8 @@ nvm install node
 nvm alias default node
 npm install --omit=dev --global @djot/djot@latest # Installed in: ~/.nvm/versions/node/v22.11.0/bin/djot
 
-# Broken
 # Lua
-# luarocks install --no-doc --local djot # Installed in: ~/.luarocks/bin/djot
+luarocks install --no-doc --local djot # Installed in: ~/.luarocks/bin/djot
 
 # Rust
 rustup update stable
