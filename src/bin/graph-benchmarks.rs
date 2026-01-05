@@ -8,7 +8,7 @@ use plotters::prelude::*;
 /// The Muted qualitative color scheme of [Tol]. A color scheme for the
 /// color blind.
 ///
-/// [Tol]: https://sronpersonalpages.nl/~pault/
+/// [Tol]: https://sronpersonalpages.nl/~pault/#sec:qualitative
 pub const INDIGO: RGBColor = RGBColor(0x33, 0x22, 0x88);
 pub const CYAN: RGBColor = RGBColor(0x88, 0xCC, 0xEE);
 pub const TEAL: RGBColor = RGBColor(0x44, 0xAA, 0x99);
