@@ -14,6 +14,7 @@ hyperfine --warmup 20 --shell=none --export-markdown tmp/pandoc-manual-benchmark
 --command-name Haskell "djoths $PANDOC_MANUAL_DJ" \
 --command-name JavaScript "$DJOT_JS $PANDOC_MANUAL_DJ" \
 --command-name Lua "$HOME/.luarocks/bin/djot $PANDOC_MANUAL_DJ" \
+--command-name PHP "$HOME/.local/djot-php/djot-php $PANDOC_MANUAL_DJ" \
 --command-name Rust "jotdown $PANDOC_MANUAL_DJ"
 
 TARTAN_WIKIPEDIA_DJ=benchmark-files/tartan-wikipedia.dj
@@ -25,6 +26,7 @@ hyperfine --warmup 20 --shell=none --export-markdown tmp/tartan-wikipedia-benchm
 --command-name Haskell "djoths $TARTAN_WIKIPEDIA_DJ" \
 --command-name JavaScript "$DJOT_JS $TARTAN_WIKIPEDIA_DJ" \
 --command-name Lua "$HOME/.luarocks/bin/djot $TARTAN_WIKIPEDIA_DJ" \
+--command-name PHP "$HOME/.local/djot-php/djot-php $TARTAN_WIKIPEDIA_DJ" \
 --command-name Rust "jotdown $TARTAN_WIKIPEDIA_DJ"
 
 cat > tmp/benchmarks.md <<EOF
@@ -40,15 +42,17 @@ $(cat tmp/tartan-wikipedia-benchmarks.md)
 
 ### Tools
 
-$(go version)  
-Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)  
-$(ghc --version)  
-Haskell djot $(ls $HOME/.cabal/packages/hackage.haskell.org/djot/)  
-node version $(node --version)  
-JavaScript $(djot --version)  
-$(luajit -v | sed -r 's/([ .a-zA-Z0-9]+)(-[a-z0-9]+)[ .a-zA-Z0-9/():-]+/\1\2/')  
-Lua $($HOME/.luarocks/bin/djot --version)  
-$(rustc --version)  
+$(go version)
+Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)
+$(ghc --version)
+Haskell djot $(ls $HOME/.cabal/packages/hackage.haskell.org/djot/)
+node version $(node --version)
+JavaScript $(djot --version)
+$(luajit -v | sed -r 's/([ .a-zA-Z0-9]+)(-[a-z0-9]+)[ .a-zA-Z0-9/():-]+/\1\2/')
+Lua $($HOME/.luarocks/bin/djot --version)
+PHP $(php --version | head -1)
+PHP djot $(composer show -d $HOME/.local/djot-php php-collective/djot 2>/dev/null | grep versions | awk '{print $2}')
+$(rustc --version)
 EOF
 
 jotdown --version 2>> tmp/benchmarks.md
