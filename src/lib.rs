@@ -1,6 +1,6 @@
 use std::{collections::HashMap, process::Command};
 
-use chrono::{DateTime, Utc};
+use chrono::{NaiveDate, Utc};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Debug, Deserialize)]
@@ -11,7 +11,7 @@ pub struct Plot {
 
 impl From<Results> for Plot {
     fn from(results: Results) -> Self {
-        let date = Utc::now();
+        let date = Utc::now().date_naive();
         let mut plot_data = HashMap::new();
         for result in results.results {
             let plot_data_ = PlotData {
@@ -38,7 +38,7 @@ impl From<Results> for Plot {
 
 #[derive(Clone, Serialize, Debug, Deserialize)]
 pub struct PlotData {
-    pub date: DateTime<Utc>,
+    pub date: NaiveDate,
     pub mean: f32,
     pub std_dev: f32,
 }

@@ -85,9 +85,13 @@ fn make_graph(render_file: &str, file_in: &str, file_out: &str) -> anyhow::Resul
         .caption(format!("on {}", data_1.cpu), ("sans-serif", 20).into_font())
         .build_cartesian_2d(from_date..to_date, 0f32..max)?;
 
-    chart.configure_mesh().light_line_style(PALE_GREY).draw()?;
+    chart
+        .configure_mesh()
+        .disable_x_mesh()
+        .light_line_style(PALE_GREY)
+        .draw()?;
 
-    let commands = ["Go", "Haskell", "JavaScript", "Rust"];
+    let commands = ["Go", "Haskell", "JavaScript", "PHP", "Rust"];
     let colors = [WINE, SAND, GREEN, CYAN, INDIGO];
     for (command, color) in commands.iter().zip(colors) {
         let data = &data_1.plot_data[*command];
