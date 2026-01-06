@@ -13,10 +13,10 @@ hyperfine --warmup 20 --shell=none --export-markdown tmp/pandoc-manual-benchmark
 --command-name Go "$HOME/go/bin/godjot -from $PANDOC_MANUAL_DJ" \
 --command-name Haskell "djoths $PANDOC_MANUAL_DJ" \
 --command-name JavaScript "$DJOT_JS $PANDOC_MANUAL_DJ" \
+--command-name Lua "$HOME/.luarocks/bin/djot $PANDOC_MANUAL_DJ" \
 --command-name PHP "$HOME/.local/djot-php/djot-php $PANDOC_MANUAL_DJ" \
 --command-name Rust "jotdown $PANDOC_MANUAL_DJ" \
---command-name Lua "$HOME/.luarocks/bin/djot $PANDOC_MANUAL_DJ"
-
+--command-name Prolog "scryer-prolog djota-0.3.4/djota-cli.pl -- $PANDOC_MANUAL_DJ"
 
 TARTAN_WIKIPEDIA_DJ=benchmark-files/tartan-wikipedia.dj
 
@@ -26,9 +26,11 @@ hyperfine --warmup 20 --shell=none --export-markdown tmp/tartan-wikipedia-benchm
 --command-name Go "$HOME/go/bin/godjot -from $TARTAN_WIKIPEDIA_DJ" \
 --command-name Haskell "djoths $TARTAN_WIKIPEDIA_DJ" \
 --command-name JavaScript "$DJOT_JS $TARTAN_WIKIPEDIA_DJ" \
+--command-name Lua "$HOME/.luarocks/bin/djot $TARTAN_WIKIPEDIA_DJ" \
 --command-name PHP "$HOME/.local/djot-php/djot-php $TARTAN_WIKIPEDIA_DJ" \
---command-name Rust "jotdown $TARTAN_WIKIPEDIA_DJ" \
---command-name Lua "$HOME/.luarocks/bin/djot $TARTAN_WIKIPEDIA_DJ"
+--command-name Rust "jotdown $TARTAN_WIKIPEDIA_DJ"
+# Crashes my system!
+# --command-name Prolog "scryer-prolog djota-0.3.4/djota-cli.pl -- $TARTAN_WIKIPEDIA_DJ"
 
 cat > tmp/benchmarks.md <<EOF
 ### Running on $(lscpu | grep "Model name: [-|(|)| |a-z|A-Z|0-9]*" | sed -e 's/Model name: *//') at $(date --rfc-3339=seconds)

@@ -53,5 +53,9 @@ EOFPHP
 chmod +x djot-php
 cd - > /dev/null
 
+# Prolog
+wget https://github.com/aarroyoc/djota/archive/refs/tags/v0.3.4.tar.gz
+tar -xf v0.3.4.tar.gz
+
 # Hyperfine
 cargo install hyperfine # Installed in: ~/.cargo/bin/hyperfine
