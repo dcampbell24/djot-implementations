@@ -55,6 +55,8 @@ $(lua -v | awk '{print $1, $2}')
 Lua $($HOME/.luarocks/bin/djot --version)  
 $(php --version | head -1 | awk '{print $1, $2}')  
 PHP djot $(composer show -d $HOME/.local/djot-php php-collective/djot 2>/dev/null | grep versions | awk '{print $2}')
+Scryer Prolog $(scryer-prolog -v)
+Prolog djota v0.3.4
 $(rustc --version)  
 EOF
 
