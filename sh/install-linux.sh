@@ -21,8 +21,5 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 # PHP
 ./install-php-debian.sh
 
-# Prolog
-cargo install --locked scryer-prolog
-
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

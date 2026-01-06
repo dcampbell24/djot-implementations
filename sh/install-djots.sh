@@ -23,6 +23,7 @@ luarocks install --no-doc --local djot # Installed in: ~/.luarocks/bin/djot
 rustup update stable
 rustup default stable
 cargo install jotdown # Installed in: ~/.cargo/bin/jotdown
+cargo install --locked scryer-prolog
 
 # PHP
 mkdir -p ~/.local/djot-php && cd ~/.local/djot-php
@@ -53,7 +54,7 @@ EOFPHP
 chmod +x djot-php
 cd - > /dev/null
 
-# Prolog
+# Prolog Djot
 wget https://github.com/aarroyoc/djota/archive/refs/tags/v0.3.4.tar.gz
 tar -xf v0.3.4.tar.gz
 

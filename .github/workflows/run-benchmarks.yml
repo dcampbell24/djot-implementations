@@ -34,7 +34,7 @@ jobs:
         run: |
           $GITHUB_WORKSPACE/sh/install-php-debian.sh
 
-      - name: Install Djots and Hyperfine
+      - name: Install Djots, Hyperfine, and Scryer
         run: |
           $GITHUB_WORKSPACE/sh/install-djots.sh
 
