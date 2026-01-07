@@ -13,7 +13,7 @@ This repository benchmarks the various Djot implementations and generates a repo
 Time to render pandoc-manual.dj (244K) into html:
 
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
-|:---|---:|---:|---:|---:|
+| :--- | ---: | ---: | ---: | ---: |
 | `Rust` | 9.9 ± 3.8 | 3.7 | 20.2 | 1.00 |
 | `Haskell` | 30.8 ± 5.9 | 21.1 | 42.3 | 3.11 ± 1.34 |
 | `Go` | 58.3 ± 19.3 | 23.5 | 86.9 | 5.89 ± 2.99 |
@@ -25,7 +25,7 @@ Time to render pandoc-manual.dj (244K) into html:
 Time to render tartan-wikipedia.dj (1.3M) into html:
 
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
-|:---|---:|---:|---:|---:|
+| :--- | ---: | ---: | ---: | ---: |
 | `Rust` | 20.9 ± 2.1 | 19.4 | 33.0 | 1.00 |
 | `Haskell` | 134.8 ± 4.3 | 132.3 | 142.7 | 6.45 ± 0.67 |
 | `Go` | 178.7 ± 23.2 | 146.2 | 231.6 | 8.54 ± 1.40 |
@@ -38,7 +38,7 @@ Time to render tartan-wikipedia.dj (1.3M) into html:
 Time to render pandoc-manual.dj (244K) into html:
 
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
-|:---|---:|---:|---:|---:|
+| :--- | ---: | ---: | ---: | ---: |
 | `Rust` | 6.2 ± 0.1 | 6.0 | 6.7 | 1.00 |
 | `Go` | 35.4 ± 2.4 | 31.4 | 42.4 | 5.69 ± 0.39 |
 | `Haskell` | 42.1 ± 0.1 | 41.8 | 42.7 | 6.77 ± 0.07 |
@@ -50,7 +50,7 @@ Time to render pandoc-manual.dj (244K) into html:
 Time to render tartan-wikipedia.dj (1.3M) into html:
 
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
-|:---|---:|---:|---:|---:|
+| :--- | ---: | ---: | ---: | ---: |
 | `Rust` | 35.1 ± 0.2 | 34.7 | 35.6 | 1.00 |
 | `Go` | 207.6 ± 10.5 | 190.5 | 222.3 | 5.92 ± 0.30 |
 | `Haskell` | 235.7 ± 0.6 | 235.2 | 236.8 | 6.72 ± 0.04 |
