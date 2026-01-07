@@ -69,7 +69,7 @@ JavaScript djot 0.3.2
 Lua 5.4.7  
 Lua djot 0.2.1  
 PHP 8.4.16  
-PHP djot 0.1.11
+PHP djot 0.1.11  
 Scryer Prolog cargo:0.10.0  
 Prolog djota v0.3.4  
 rustc 1.92.0 (ded5c06cf 2025-12-08)  
