@@ -3,7 +3,6 @@ name = "djot-implementations"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.91"
-authors = ["David Campbell <dcampbell24@gmail.com>"]
 description = "Generates a graph of Djot implementations render time."
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/dcampbell24/djot-implementations"
