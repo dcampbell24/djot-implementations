@@ -22,7 +22,7 @@ luarocks install --no-doc --local djot # Installed in: ~/.luarocks/bin/djot
 # Rust
 rustup update stable
 rustup default stable
-cargo install jotdown # Installed in: ~/.cargo/bin/jotdown
+cargo install jotdown --features cli # Installed in: ~/.cargo/bin/jotdown
 cargo install --locked scryer-prolog
 
 # PHP
