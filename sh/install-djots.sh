@@ -58,5 +58,10 @@ cd - > /dev/null
 wget https://github.com/aarroyoc/djota/archive/refs/tags/v0.3.4.tar.gz
 tar -xf v0.3.4.tar.gz
 
+# C
+rm -rf ~/.local/cdjot
+git clone --depth 1 https://github.com/karlb/cdjot.git ~/.local/cdjot
+make -C ~/.local/cdjot # Installed in: ~/.local/cdjot/cdjot
+
 # Hyperfine
 cargo install hyperfine # Installed in: ~/.cargo/bin/hyperfine
