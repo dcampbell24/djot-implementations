@@ -52,3 +52,4 @@ PHP djot 0.1.26
 Scryer Prolog cargo:0.10.0  
 Prolog djota v0.3.4  
 rustc 1.95.0 (59807616e 2026-04-14)  
+jotdown 0.10.0
