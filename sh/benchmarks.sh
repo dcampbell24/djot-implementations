@@ -10,6 +10,7 @@ DJOT_JS=$(echo $(nvm which current) | sed -e 's/node$/djot/')
 hyperfine --warmup 20 --shell=none --export-markdown tmp/pandoc-manual-benchmarks.md \
 --sort mean-time \
 --export-json tmp/pandoc-manual-benchmarks.json \
+--command-name C "$HOME/.local/cdjot/cdjot $PANDOC_MANUAL_DJ" \
 --command-name Go "$HOME/go/bin/godjot -from $PANDOC_MANUAL_DJ" \
 --command-name Haskell "djoths $PANDOC_MANUAL_DJ" \
 --command-name JavaScript "$DJOT_JS $PANDOC_MANUAL_DJ" \
@@ -23,6 +24,7 @@ TARTAN_WIKIPEDIA_DJ=benchmark-files/tartan-wikipedia.dj
 hyperfine --warmup 20 --shell=none --export-markdown tmp/tartan-wikipedia-benchmarks.md \
 --sort mean-time \
 --export-json tmp/tartan-wikipedia-benchmarks.json \
+--command-name C "$HOME/.local/cdjot/cdjot $TARTAN_WIKIPEDIA_DJ" \
 --command-name Go "$HOME/go/bin/godjot -from $TARTAN_WIKIPEDIA_DJ" \
 --command-name Haskell "djoths $TARTAN_WIKIPEDIA_DJ" \
 --command-name JavaScript "$DJOT_JS $TARTAN_WIKIPEDIA_DJ" \
@@ -45,6 +47,8 @@ $(cat tmp/tartan-wikipedia-benchmarks.md)
 
 ### Tools
 
+$(cc --version | head -1)  
+C djot cdjot@$(git -C $HOME/.local/cdjot rev-parse --short HEAD)  
 $(go version)  
 Go djot $(ls $HOME/go/pkg/mod/github.com/sivukhin/)  
 $(ghc --version)  

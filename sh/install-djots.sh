@@ -22,7 +22,7 @@ luarocks install --no-doc --local djot # Installed in: ~/.luarocks/bin/djot
 # Rust
 rustup update stable
 rustup default stable
-cargo install jotdown # Installed in: ~/.cargo/bin/jotdown
+cargo install jotdown --features cli # Installed in: ~/.cargo/bin/jotdown
 cargo install --locked scryer-prolog
 
 # PHP
@@ -57,6 +57,11 @@ cd - > /dev/null
 # Prolog Djot
 wget https://github.com/aarroyoc/djota/archive/refs/tags/v0.3.4.tar.gz
 tar -xf v0.3.4.tar.gz
+
+# C
+rm -rf ~/.local/cdjot
+git clone --depth 1 https://github.com/karlb/cdjot.git ~/.local/cdjot
+make -C ~/.local/cdjot # Installed in: ~/.local/cdjot/cdjot
 
 # Hyperfine
 cargo install hyperfine # Installed in: ~/.cargo/bin/hyperfine
