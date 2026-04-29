@@ -8,69 +8,47 @@ This repository benchmarks the various Djot implementations and generates a repo
 
 ![tartan wikipedia benchmarks](benchmark-files/tartan-wikipedia-benchmarks.png "Tartan Wikipedia Benchmarks")
 
-### Running on 12th Gen Intel(R) Core(TM) i5-12600K at 2026-01-07 16:29:08-05:00
+### Running on 12th Gen Intel(R) Core(TM) i5-12600K at 2026-04-29 17:11:08-04:00
 
 Time to render pandoc-manual.dj (244K) into html:
 
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
-| :--- | ---: | ---: | ---: | ---: |
-| `Rust` | 9.9 ± 3.8 | 3.7 | 20.2 | 1.00 |
-| `Haskell` | 30.8 ± 5.9 | 21.1 | 42.3 | 3.11 ± 1.34 |
-| `Go` | 58.3 ± 19.3 | 23.5 | 86.9 | 5.89 ± 2.99 |
-| `JavaScript` | 63.6 ± 3.0 | 57.7 | 70.4 | 6.43 ± 2.50 |
-| `PHP` | 85.6 ± 2.6 | 82.9 | 94.9 | 8.66 ± 3.34 |
-| `Lua` | 89.6 ± 3.4 | 86.2 | 101.3 | 9.07 ± 3.51 |
-| `Prolog` | 2888.3 ± 23.1 | 2863.3 | 2940.7 | 292.20 ± 112.52 |
+|:---|---:|---:|---:|---:|
+| `C` | 3.7 ± 2.7 | 1.9 | 11.9 | 1.00 |
+| `Rust` | 6.9 ± 3.6 | 3.6 | 21.0 | 1.88 ± 1.69 |
+| `Haskell` | 20.4 ± 3.2 | 17.0 | 38.8 | 5.56 ± 4.16 |
+| `Go` | 61.1 ± 24.7 | 25.1 | 111.1 | 16.63 ± 13.91 |
+| `PHP` | 86.5 ± 3.0 | 82.1 | 92.3 | 23.56 ± 17.27 |
+| `Lua` | 93.0 ± 3.0 | 88.5 | 101.7 | 25.33 ± 18.56 |
+| `JavaScript` | 115.4 ± 2.0 | 112.4 | 120.1 | 31.43 ± 23.02 |
+| `Prolog` | 2762.7 ± 34.7 | 2734.8 | 2846.9 | 752.34 ± 550.84 |
 
 Time to render tartan-wikipedia.dj (1.3M) into html:
 
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
-| :--- | ---: | ---: | ---: | ---: |
-| `Rust` | 20.9 ± 2.1 | 19.4 | 33.0 | 1.00 |
-| `Haskell` | 134.8 ± 4.3 | 132.3 | 142.7 | 6.45 ± 0.67 |
-| `Go` | 178.7 ± 23.2 | 146.2 | 231.6 | 8.54 ± 1.40 |
-| `JavaScript` | 185.0 ± 5.3 | 176.9 | 196.0 | 8.84 ± 0.92 |
-| `PHP` | 490.2 ± 5.5 | 482.5 | 499.4 | 23.43 ± 2.35 |
-| `Lua` | 659.0 ± 11.8 | 646.5 | 681.7 | 31.50 ± 3.18 |
-
-### Running on AMD EPYC 7763 64-Core Processor at 2026-01-06 20:08:26+00:00
-
-Time to render pandoc-manual.dj (244K) into html:
-
-| Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
-| :--- | ---: | ---: | ---: | ---: |
-| `Rust` | 6.2 ± 0.1 | 6.0 | 6.7 | 1.00 |
-| `Go` | 35.4 ± 2.4 | 31.4 | 42.4 | 5.69 ± 0.39 |
-| `Haskell` | 42.1 ± 0.1 | 41.8 | 42.7 | 6.77 ± 0.07 |
-| `JavaScript` | 116.1 ± 1.8 | 113.5 | 119.4 | 18.67 ± 0.33 |
-| `Lua` | 150.1 ± 1.3 | 147.4 | 152.6 | 24.15 ± 0.30 |
-| `PHP` | 452.2 ± 4.2 | 446.8 | 458.0 | 72.75 ± 0.95 |
-| `Prolog` | 5515.9 ± 21.0 | 5493.1 | 5556.1 | 887.29 ± 8.70 |
-
-Time to render tartan-wikipedia.dj (1.3M) into html:
-
-| Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
-| :--- | ---: | ---: | ---: | ---: |
-| `Rust` | 35.1 ± 0.2 | 34.7 | 35.6 | 1.00 |
-| `Go` | 207.6 ± 10.5 | 190.5 | 222.3 | 5.92 ± 0.30 |
-| `Haskell` | 235.7 ± 0.6 | 235.2 | 236.8 | 6.72 ± 0.04 |
-| `JavaScript` | 368.7 ± 6.8 | 358.8 | 376.8 | 10.51 ± 0.20 |
-| `Lua` | 1147.4 ± 12.0 | 1131.4 | 1174.3 | 32.71 ± 0.39 |
-| `PHP` | 2772.1 ± 51.3 | 2700.1 | 2852.7 | 79.03 ± 1.53 |
+|:---|---:|---:|---:|---:|
+| `C` | 15.0 ± 2.3 | 11.4 | 23.3 | 1.00 |
+| `Rust` | 21.5 ± 1.9 | 19.7 | 28.6 | 1.43 ± 0.25 |
+| `Haskell` | 123.1 ± 3.3 | 119.7 | 132.6 | 8.20 ± 1.28 |
+| `Go` | 171.0 ± 38.0 | 129.9 | 240.3 | 11.38 ± 3.08 |
+| `JavaScript` | 239.7 ± 4.0 | 234.4 | 246.5 | 15.96 ± 2.47 |
+| `PHP` | 452.8 ± 3.1 | 448.2 | 459.2 | 30.15 ± 4.64 |
+| `Lua` | 652.8 ± 4.6 | 645.8 | 662.3 | 43.46 ± 6.69 |
 
 ### Tools
 
-go version go1.23.3 linux/amd64  
+cc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)  
+C djot cdjot@9db769e  
+go version go1.25.9 X:nodwarf5 linux/amd64  
 Go djot godjot@v1.0.6  
-The Glorious Glasgow Haskell Compilation System, version 9.6.7  
-Haskell djot 0.1.2.4  
-node version v25.2.1  
+The Glorious Glasgow Haskell Compilation System, version 9.8.4  
+Haskell djot djot 0.1.4  
+node version v22.22.0  
 JavaScript djot 0.3.2  
-Lua 5.4.7  
+Lua 5.4.8  
 Lua djot 0.2.1  
-PHP 8.4.16  
-PHP djot 0.1.11  
+PHP 8.4.20  
+PHP djot 0.1.26  
 Scryer Prolog cargo:0.10.0  
 Prolog djota v0.3.4  
-rustc 1.92.0 (ded5c06cf 2025-12-08)  
-Rust jotdown v0.9.1
+rustc 1.95.0 (59807616e 2026-04-14)  
