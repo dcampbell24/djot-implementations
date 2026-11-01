@@ -8,7 +8,6 @@ PANDOC_MANUAL_DJ=benchmark-files/pandoc-manual.dj
 DJOT_JS=$(echo $(nvm which current) | sed -e 's/node$/djot/')
 
 hyperfine --warmup 20 --shell=none --export-markdown tmp/pandoc-manual-benchmarks.md \
---sort mean-time \
 --export-json tmp/pandoc-manual-benchmarks.json \
 --command-name C "$HOME/.local/cdjot/cdjot $PANDOC_MANUAL_DJ" \
 --command-name Go "$HOME/go/bin/godjot -from $PANDOC_MANUAL_DJ" \
@@ -22,7 +21,6 @@ hyperfine --warmup 20 --shell=none --export-markdown tmp/pandoc-manual-benchmark
 TARTAN_WIKIPEDIA_DJ=benchmark-files/tartan-wikipedia.dj
 
 hyperfine --warmup 20 --shell=none --export-markdown tmp/tartan-wikipedia-benchmarks.md \
---sort mean-time \
 --export-json tmp/tartan-wikipedia-benchmarks.json \
 --command-name C "$HOME/.local/cdjot/cdjot $TARTAN_WIKIPEDIA_DJ" \
 --command-name Go "$HOME/go/bin/godjot -from $TARTAN_WIKIPEDIA_DJ" \
